@@ -1,4 +1,5 @@
 import Image from "next/image";
+import ErrorBoundary from "@/app/ui/error-boundary";
 
 import { sdk } from "@/app/lib/anilist";
 import { Suspense } from "react";
@@ -7,9 +8,11 @@ const Home = () => (
   <main>
     <h1>Top Anime</h1>
 
-    <Suspense fallback={<div>Loading...</div>}>
-      <List />
-    </Suspense>
+    <ErrorBoundary>
+      <Suspense fallback={<div>Loading...</div>}>
+        <List />
+      </Suspense>
+    </ErrorBoundary>
   </main>
 );
 
