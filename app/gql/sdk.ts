@@ -4673,15 +4673,40 @@ export type YearStats = {
   year?: Maybe<Scalars['Int']['output']>;
 };
 
+export type AnimeQueryVariables = Exact<{
+  id: Scalars['Int']['input'];
+}>;
+
+
+export type AnimeQuery = { __typename?: 'Query', Page?: { __typename?: 'Page', media?: Array<{ __typename?: 'Media', id: number, season?: MediaSeason | null, seasonYear?: number | null, description?: string | null, title?: { __typename?: 'MediaTitle', romaji?: string | null } | null, coverImage?: { __typename?: 'MediaCoverImage', extraLarge?: string | null } | null } | null> | null } | null };
+
 export type TopAnimeQueryVariables = Exact<{
   page: Scalars['Int']['input'];
   perPage: Scalars['Int']['input'];
 }>;
 
 
-export type TopAnimeQuery = { __typename?: 'Query', Page?: { __typename?: 'Page', media?: Array<{ __typename?: 'Media', id: number, averageScore?: number | null, title?: { __typename?: 'MediaTitle', romaji?: string | null, native?: string | null } | null, coverImage?: { __typename?: 'MediaCoverImage', large?: string | null, color?: string | null } | null } | null> | null } | null };
+export type TopAnimeQuery = { __typename?: 'Query', Page?: { __typename?: 'Page', media?: Array<{ __typename?: 'Media', id: number, averageScore?: number | null, title?: { __typename?: 'MediaTitle', romaji?: string | null } | null, coverImage?: { __typename?: 'MediaCoverImage', large?: string | null, color?: string | null } | null } | null> | null } | null };
 
 
+export const AnimeDocument = gql`
+    query Anime($id: Int!) {
+  Page {
+    media(type: ANIME, id: $id) {
+      id
+      season
+      seasonYear
+      description
+      title {
+        romaji
+      }
+      coverImage {
+        extraLarge
+      }
+    }
+  }
+}
+    `;
 export const TopAnimeDocument = gql`
     query TopAnime($page: Int!, $perPage: Int!) {
   Page(page: $page, perPage: $perPage) {
@@ -4689,7 +4714,6 @@ export const TopAnimeDocument = gql`
       id
       title {
         romaji
-        native
       }
       coverImage {
         large
@@ -4708,6 +4732,9 @@ const defaultWrapper: SdkFunctionWrapper = (action, _operationName, _operationTy
 
 export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = defaultWrapper) {
   return {
+    Anime(variables: AnimeQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<AnimeQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<AnimeQuery>({ document: AnimeDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'Anime', 'query', variables);
+    },
     TopAnime(variables: TopAnimeQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<TopAnimeQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<TopAnimeQuery>({ document: TopAnimeDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'TopAnime', 'query', variables);
     }
