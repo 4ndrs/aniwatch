@@ -1,9 +1,9 @@
+import Link from "next/link";
 import Image from "next/image";
 import ErrorBoundary from "@/app/ui/error-boundary";
 
 import { sdk } from "@/app/lib/anilist";
 import { Suspense } from "react";
-import Link from "next/link";
 
 const Home = () => (
   <main>

@@ -1,8 +1,8 @@
 import Image from "next/image";
 
 import { sdk } from "@/app/lib/anilist";
-import { notFound } from "next/navigation";
 import { Suspense } from "react";
+import { notFound } from "next/navigation";
 
 type Props = {
   params: Promise<{
