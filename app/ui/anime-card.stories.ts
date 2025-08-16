@@ -22,3 +22,11 @@ export const Frieren: Story = {
     color: "hsl(129, 80%, 70%)",
   },
 };
+
+export const Kaguya: Story = {
+  args: {
+    url: "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx151384-gv0q8wOE6D58.jpg",
+    title: "Kaguya-sama wa Kokurasetai: First Kiss wa Owaranai",
+    color: "rgb(227, 79, 133)",
+  },
+};
