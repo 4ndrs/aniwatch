@@ -17,7 +17,7 @@ const AnimeCard = ({ imageUrl, title, color }: Props) => (
   >
     <Cover src={imageUrl} alt={title} size="lg" className="rounded-sm" />
 
-    <h2 className="line-clamp-2 w-[185px] text-sm font-semibold transition-colors duration-200 group-hover:text-[var(--anime-color)]">
+    <h2 className="line-clamp-2 w-[185px] font-(family-name:--font-overpass) text-sm font-semibold transition-colors duration-200 group-hover:text-[var(--anime-color)]">
       {title ?? "No Title"}
     </h2>
   </article>

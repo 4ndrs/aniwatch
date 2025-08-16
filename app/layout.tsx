@@ -1,8 +1,14 @@
-import { Overpass } from "next/font/google";
+import { Overpass, Roboto } from "next/font/google";
 
 import "@/app/ui/globals.css";
 
 import type { Metadata } from "next";
+
+const roboto = Roboto({
+  variable: "--font-roboto",
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800"],
+});
 
 const overpass = Overpass({
   variable: "--font-overpass",
@@ -22,7 +28,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${overpass.variable} antialiased`}>{children}</body>
+      <body className={`${roboto.variable} ${overpass.variable} antialiased`}>
+        {children}
+      </body>
     </html>
   );
 }

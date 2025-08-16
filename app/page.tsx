@@ -7,7 +7,9 @@ import { Suspense } from "react";
 
 const Home = () => (
   <main className="mx-auto max-w-[71.25rem] p-4 2xl:max-w-[85rem]">
-    <h1 className="my-8.5 text-[1.75rem] font-extrabold">Top Anime</h1>
+    <h1 className="my-8.5 font-(family-name:--font-overpass) text-[1.75rem] font-extrabold">
+      Top Anime
+    </h1>
 
     <ErrorBoundary>
       <Suspense fallback={<div>Loading...</div>}>

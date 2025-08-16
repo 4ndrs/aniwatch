@@ -8,11 +8,16 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-overpass);
+  --font-sans: var(--font-roboto);
+}
+
+@theme {
+  --color-text: rgb(159, 173, 189);
+  --color-text-light: rgb(114, 138, 161);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-overpass);
+  font-family: var(--font-roboto);
 }
