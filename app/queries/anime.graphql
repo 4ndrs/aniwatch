@@ -5,6 +5,7 @@ query Anime($id: Int!) {
       season
       seasonYear
       description
+      bannerImage
       title { romaji }
       coverImage { extraLarge }
     }
