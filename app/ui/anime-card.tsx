@@ -1,9 +1,9 @@
 import Image from "next/image";
 
 type Props = {
-  url?: string;
-  title?: string;
-  color?: string;
+  url?: string | null;
+  title?: string | null;
+  color?: string | null;
 };
 
 const AnimeCard = ({ url, title, color }: Props) => (
@@ -15,19 +15,18 @@ const AnimeCard = ({ url, title, color }: Props) => (
     }
     className="group flex size-fit flex-col gap-2.5"
   >
-    {url ? (
-      <Image
-        src={url ?? ""}
-        alt={title ?? "Anime Cover"}
-        width={185}
-        height={265}
-        className="rounded-sm"
-      />
-    ) : (
-      <div className="flex h-[265px] w-[185px] items-center justify-center rounded-sm bg-gray-800">
+    <div className="relative flex h-[265px] w-[185px] items-center justify-center overflow-hidden rounded-sm bg-gray-800">
+      {url ? (
+        <Image
+          fill
+          src={url}
+          alt={title ? "Cover of " + title : "Anime Cover"}
+          className="object-cover"
+        />
+      ) : (
         <span className="text-xl font-bold text-gray-600">No Image</span>
-      </div>
-    )}
+      )}
+    </div>
     <h2 className="line-clamp-2 w-[185px] text-sm font-semibold transition-colors duration-200 group-hover:text-[var(--anime-color)]">
       {title ?? "No Title"}
     </h2>
