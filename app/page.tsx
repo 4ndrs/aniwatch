@@ -29,9 +29,9 @@ const List = async () => {
       {data.Page.media.map((anime) => (
         <Link href={`/anime/${anime?.id}`} key={anime?.id}>
           <AnimeCard
-            url={anime?.coverImage?.large}
             title={anime?.title?.romaji}
             color={anime?.coverImage?.color}
+            imageUrl={anime?.coverImage?.large}
           />
         </Link>
       ))}
