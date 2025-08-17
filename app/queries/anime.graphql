@@ -1,13 +1,11 @@
 query Anime($id: Int!) {
-  Page {
-    media(type: ANIME,id: $id) {
-      id
-      season
-      seasonYear
-      description
-      bannerImage
-      title { romaji }
-      coverImage { extraLarge }
-    }
+  Media(type: ANIME,id: $id) {
+    id
+    season
+    seasonYear
+    description
+    bannerImage
+    title { romaji }
+    coverImage { extraLarge }
   }
 }

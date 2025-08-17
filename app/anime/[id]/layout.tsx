@@ -105,8 +105,7 @@ const BannerImage = async ({ params }: Pick<Props, "params">) => {
 const loadAnime = unstable_cache(
   async (id: number) => {
     try {
-      const data = await sdk.Anime({ id });
-      const anime = data?.Page?.media?.[0];
+      const anime = (await sdk.Anime({ id })).Media;
 
       if (!anime) {
         throw new Error("Anime not found");

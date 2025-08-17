@@ -4678,7 +4678,7 @@ export type AnimeQueryVariables = Exact<{
 }>;
 
 
-export type AnimeQuery = { __typename?: 'Query', Page?: { __typename?: 'Page', media?: Array<{ __typename?: 'Media', id: number, season?: MediaSeason | null, seasonYear?: number | null, description?: string | null, bannerImage?: string | null, title?: { __typename?: 'MediaTitle', romaji?: string | null } | null, coverImage?: { __typename?: 'MediaCoverImage', extraLarge?: string | null } | null } | null> | null } | null };
+export type AnimeQuery = { __typename?: 'Query', Media?: { __typename?: 'Media', id: number, season?: MediaSeason | null, seasonYear?: number | null, description?: string | null, bannerImage?: string | null, title?: { __typename?: 'MediaTitle', romaji?: string | null } | null, coverImage?: { __typename?: 'MediaCoverImage', extraLarge?: string | null } | null } | null };
 
 export type TopAnimeQueryVariables = Exact<{
   page: Scalars['Int']['input'];
@@ -4691,19 +4691,17 @@ export type TopAnimeQuery = { __typename?: 'Query', Page?: { __typename?: 'Page'
 
 export const AnimeDocument = gql`
     query Anime($id: Int!) {
-  Page {
-    media(type: ANIME, id: $id) {
-      id
-      season
-      seasonYear
-      description
-      bannerImage
-      title {
-        romaji
-      }
-      coverImage {
-        extraLarge
-      }
+  Media(type: ANIME, id: $id) {
+    id
+    season
+    seasonYear
+    description
+    bannerImage
+    title {
+      romaji
+    }
+    coverImage {
+      extraLarge
     }
   }
 }
