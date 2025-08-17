@@ -28,7 +28,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${roboto.variable} ${overpass.variable} antialiased`}>
+      <body
+        className={`${roboto.variable} ${overpass.variable} pb-20 antialiased`}
+      >
         {children}
       </body>
     </html>

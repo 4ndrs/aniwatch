@@ -20,5 +20,7 @@ query Anime($id: Int!) {
     hashtag
     genres
     synonyms
+    externalLinks { icon, color, language, site, url, id }
+
   }
 }

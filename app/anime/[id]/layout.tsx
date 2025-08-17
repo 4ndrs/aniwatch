@@ -3,6 +3,7 @@ import Cover from "@/app/ui/cover";
 import Rating from "@/app/ui/rating";
 import InfoPanel from "@/app/ui/info-panel";
 import Description from "@/app/ui/description";
+import ExternalLinks from "@/app/ui/external-links";
 
 import { sdk } from "@/app/lib/anilist";
 import { sizes } from "@/app/ui/utils";
@@ -57,11 +58,34 @@ const AnimeLayout = ({ children, params }: Props) => (
         <Suspense fallback={<div>Loading info...</div>}>
           <SideInfoPanel params={params} />
         </Suspense>
+
+        <Suspense fallback={<div>Loading external links...</div>}>
+          <ExLinks params={params} />
+        </Suspense>
       </div>
 
       {children}
     </div>
   </main>
+);
+
+const loadAnime = unstable_cache(
+  async (id: number) => {
+    try {
+      const anime = (await sdk.Anime({ id })).Media;
+
+      if (!anime) {
+        throw new Error("Anime not found");
+      }
+
+      return { anime, error: false } as const;
+    } catch (error) {
+      console.error(`Error loading anime with id ${id}:`, error);
+      return { error: true } as const;
+    }
+  },
+  undefined,
+  { revalidate: 86400 }, // Cache for 24 hours
 );
 
 const MainInfo = async ({ params }: Pick<Props, "params">) => {
@@ -133,31 +157,20 @@ const Rankings = async ({ params }: Pick<Props, "params">) => {
   return <Rating rank={rating?.rank} context={rating?.context} />;
 };
 
-const loadAnime = unstable_cache(
-  async (id: number) => {
-    try {
-      const anime = (await sdk.Anime({ id })).Media;
-
-      if (!anime) {
-        throw new Error("Anime not found");
-      }
-
-      return { anime, error: false } as const;
-    } catch (error) {
-      console.error(`Error loading anime with id ${id}:`, error);
-      return { error: true } as const;
-    }
-  },
-  undefined,
-  { revalidate: 86400 }, // Cache for 24 hours
-);
-
 const SideInfoPanel = async ({ params }: Pick<Props, "params">) => {
   const id = Number((await params).id);
 
   const { anime } = await loadAnime(id);
 
   return <InfoPanel anime={anime} />;
+};
+
+const ExLinks = async ({ params }: Pick<Props, "params">) => {
+  const id = Number((await params).id);
+
+  const { anime } = await loadAnime(id);
+
+  return <ExternalLinks links={anime?.externalLinks} />;
 };
 
 export default AnimeLayout;
