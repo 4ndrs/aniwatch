@@ -7,5 +7,7 @@ query Anime($id: Int!) {
     bannerImage
     title { romaji }
     coverImage { extraLarge }
+    rankings { rank, type, allTime, context }
+
   }
 }

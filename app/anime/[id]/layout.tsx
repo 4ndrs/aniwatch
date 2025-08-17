@@ -1,11 +1,13 @@
 import Image from "next/image";
 import Cover from "@/app/ui/cover";
+import Rating from "@/app/ui/rating";
 import Description from "@/app/ui/description";
 
 import { sdk } from "@/app/lib/anilist";
 import { sizes } from "@/app/ui/utils";
 import { Suspense } from "react";
 import { notFound } from "next/navigation";
+import { MediaRankType } from "@/app/gql/graphql";
 import { unstable_cache } from "next/cache";
 
 type Props = {
@@ -42,7 +44,15 @@ const AnimeLayout = ({ children, params }: Props) => (
       </div>
     </div>
 
-    {children}
+    <div className="mx-auto flex max-w-[71.25rem] gap-[1.875rem] px-4 2xl:max-w-[85rem]">
+      <div style={{ width: sizes.xl.width }} className="flex-shrink-0">
+        <Suspense fallback={<div>Loading rankings...</div>}>
+          <Rankings params={params} />
+        </Suspense>
+      </div>
+
+      {children}
+    </div>
   </main>
 );
 
@@ -100,6 +110,19 @@ const BannerImage = async ({ params }: Pick<Props, "params">) => {
       <div className="to-shadow-dark/60 absolute inset-0 bg-gradient-to-b from-transparent via-transparent" />
     </>
   ) : undefined;
+};
+
+const Rankings = async ({ params }: Pick<Props, "params">) => {
+  const id = Number((await params).id);
+
+  const { anime } = await loadAnime(id);
+
+  // only get the highest rated ranking of all time
+  const rating = anime?.rankings?.find(
+    (ranking) => ranking?.type === MediaRankType.Rated && ranking.allTime,
+  );
+
+  return <Rating rank={rating?.rank} context={rating?.context} />;
 };
 
 const loadAnime = unstable_cache(

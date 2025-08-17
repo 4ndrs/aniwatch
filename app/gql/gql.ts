@@ -14,11 +14,11 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  * Learn more about it here: https://the-guild.dev/graphql/codegen/plugins/presets/preset-client#reducing-bundle-size
  */
 type Documents = {
-    "query Anime($id: Int!) {\n  Media(type: ANIME, id: $id) {\n    id\n    season\n    seasonYear\n    description\n    bannerImage\n    title {\n      romaji\n    }\n    coverImage {\n      extraLarge\n    }\n  }\n}": typeof types.AnimeDocument,
+    "query Anime($id: Int!) {\n  Media(type: ANIME, id: $id) {\n    id\n    season\n    seasonYear\n    description\n    bannerImage\n    title {\n      romaji\n    }\n    coverImage {\n      extraLarge\n    }\n    rankings {\n      rank\n      type\n      allTime\n      context\n    }\n  }\n}": typeof types.AnimeDocument,
     "query TopAnime($page: Int!, $perPage: Int!) {\n  Page(page: $page, perPage: $perPage) {\n    media(type: ANIME, sort: SCORE_DESC) {\n      id\n      title {\n        romaji\n      }\n      coverImage {\n        large\n        color\n      }\n      averageScore\n    }\n  }\n}": typeof types.TopAnimeDocument,
 };
 const documents: Documents = {
-    "query Anime($id: Int!) {\n  Media(type: ANIME, id: $id) {\n    id\n    season\n    seasonYear\n    description\n    bannerImage\n    title {\n      romaji\n    }\n    coverImage {\n      extraLarge\n    }\n  }\n}": types.AnimeDocument,
+    "query Anime($id: Int!) {\n  Media(type: ANIME, id: $id) {\n    id\n    season\n    seasonYear\n    description\n    bannerImage\n    title {\n      romaji\n    }\n    coverImage {\n      extraLarge\n    }\n    rankings {\n      rank\n      type\n      allTime\n      context\n    }\n  }\n}": types.AnimeDocument,
     "query TopAnime($page: Int!, $perPage: Int!) {\n  Page(page: $page, perPage: $perPage) {\n    media(type: ANIME, sort: SCORE_DESC) {\n      id\n      title {\n        romaji\n      }\n      coverImage {\n        large\n        color\n      }\n      averageScore\n    }\n  }\n}": types.TopAnimeDocument,
 };
 
@@ -39,7 +39,7 @@ export function graphql(source: string): unknown;
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "query Anime($id: Int!) {\n  Media(type: ANIME, id: $id) {\n    id\n    season\n    seasonYear\n    description\n    bannerImage\n    title {\n      romaji\n    }\n    coverImage {\n      extraLarge\n    }\n  }\n}"): (typeof documents)["query Anime($id: Int!) {\n  Media(type: ANIME, id: $id) {\n    id\n    season\n    seasonYear\n    description\n    bannerImage\n    title {\n      romaji\n    }\n    coverImage {\n      extraLarge\n    }\n  }\n}"];
+export function graphql(source: "query Anime($id: Int!) {\n  Media(type: ANIME, id: $id) {\n    id\n    season\n    seasonYear\n    description\n    bannerImage\n    title {\n      romaji\n    }\n    coverImage {\n      extraLarge\n    }\n    rankings {\n      rank\n      type\n      allTime\n      context\n    }\n  }\n}"): (typeof documents)["query Anime($id: Int!) {\n  Media(type: ANIME, id: $id) {\n    id\n    season\n    seasonYear\n    description\n    bannerImage\n    title {\n      romaji\n    }\n    coverImage {\n      extraLarge\n    }\n    rankings {\n      rank\n      type\n      allTime\n      context\n    }\n  }\n}"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
