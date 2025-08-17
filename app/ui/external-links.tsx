@@ -49,6 +49,10 @@ const ExternalLinks = ({ links }: Props) => {
 
                 <span className="text-text group-hover:text-blue font-(family-name:--font-overpass) text-[0.8125rem] leading-[0.8125rem] font-bold transition-colors group-hover:group-data-[highlight]:text-white">
                   {link.site}
+
+                  {link.language?.toLowerCase() === "japanese" && (
+                    <span className="text-[0.625rem] opacity-70"> JP</span>
+                  )}
                 </span>
               </a>
             </li>
