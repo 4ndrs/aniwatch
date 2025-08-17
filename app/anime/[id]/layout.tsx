@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Cover from "@/app/ui/cover";
 import Rating from "@/app/ui/rating";
+import InfoPanel from "@/app/ui/info-panel";
 import Description from "@/app/ui/description";
 
 import { sdk } from "@/app/lib/anilist";
@@ -45,9 +46,16 @@ const AnimeLayout = ({ children, params }: Props) => (
     </div>
 
     <div className="mx-auto flex max-w-[71.25rem] gap-[1.875rem] px-4 2xl:max-w-[85rem]">
-      <div style={{ width: sizes.xl.width }} className="flex-shrink-0">
+      <div
+        style={{ width: sizes.xl.width }}
+        className="flex flex-shrink-0 flex-col gap-4"
+      >
         <Suspense fallback={<div>Loading rankings...</div>}>
           <Rankings params={params} />
+        </Suspense>
+
+        <Suspense fallback={<div>Loading info...</div>}>
+          <SideInfoPanel params={params} />
         </Suspense>
       </div>
 
@@ -143,5 +151,13 @@ const loadAnime = unstable_cache(
   undefined,
   { revalidate: 86400 }, // Cache for 24 hours
 );
+
+const SideInfoPanel = async ({ params }: Pick<Props, "params">) => {
+  const id = Number((await params).id);
+
+  const { anime } = await loadAnime(id);
+
+  return <InfoPanel anime={anime} />;
+};
 
 export default AnimeLayout;

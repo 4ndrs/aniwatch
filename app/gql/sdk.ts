@@ -4678,7 +4678,7 @@ export type AnimeQueryVariables = Exact<{
 }>;
 
 
-export type AnimeQuery = { __typename?: 'Query', Media?: { __typename?: 'Media', id: number, season?: MediaSeason | null, seasonYear?: number | null, description?: string | null, bannerImage?: string | null, title?: { __typename?: 'MediaTitle', romaji?: string | null } | null, coverImage?: { __typename?: 'MediaCoverImage', extraLarge?: string | null } | null, rankings?: Array<{ __typename?: 'MediaRank', rank: number, type: MediaRankType, allTime?: boolean | null, context: string } | null> | null } | null };
+export type AnimeQuery = { __typename?: 'Query', Media?: { __typename?: 'Media', id: number, bannerImage?: string | null, description?: string | null, format?: MediaFormat | null, episodes?: number | null, duration?: number | null, status?: MediaStatus | null, season?: MediaSeason | null, seasonYear?: number | null, averageScore?: number | null, source?: MediaSource | null, hashtag?: string | null, genres?: Array<string | null> | null, synonyms?: Array<string | null> | null, coverImage?: { __typename?: 'MediaCoverImage', extraLarge?: string | null } | null, title?: { __typename?: 'MediaTitle', romaji?: string | null, english?: string | null, native?: string | null } | null, rankings?: Array<{ __typename?: 'MediaRank', rank: number, type: MediaRankType, allTime?: boolean | null, context: string } | null> | null, startDate?: { __typename?: 'FuzzyDate', day?: number | null, month?: number | null, year?: number | null } | null, endDate?: { __typename?: 'FuzzyDate', day?: number | null, month?: number | null, year?: number | null } | null, studios?: { __typename?: 'StudioConnection', nodes?: Array<{ __typename?: 'Studio', name: string, id: number, isAnimationStudio: boolean } | null> | null } | null } | null };
 
 export type TopAnimeQueryVariables = Exact<{
   page: Scalars['Int']['input'];
@@ -4693,15 +4693,15 @@ export const AnimeDocument = gql`
     query Anime($id: Int!) {
   Media(type: ANIME, id: $id) {
     id
-    season
-    seasonYear
-    description
     bannerImage
-    title {
-      romaji
-    }
+    description
     coverImage {
       extraLarge
+    }
+    title {
+      romaji
+      english
+      native
     }
     rankings {
       rank
@@ -4709,6 +4709,34 @@ export const AnimeDocument = gql`
       allTime
       context
     }
+    format
+    episodes
+    duration
+    status
+    startDate {
+      day
+      month
+      year
+    }
+    endDate {
+      day
+      month
+      year
+    }
+    season
+    seasonYear
+    averageScore
+    studios {
+      nodes {
+        name
+        id
+        isAnimationStudio
+      }
+    }
+    source
+    hashtag
+    genres
+    synonyms
   }
 }
     `;

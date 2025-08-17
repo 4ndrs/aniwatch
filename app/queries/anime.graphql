@@ -1,13 +1,24 @@
 query Anime($id: Int!) {
   Media(type: ANIME,id: $id) {
     id
+    bannerImage
+    description
+    coverImage { extraLarge }
+    title { romaji, english, native }
+    rankings { rank, type, allTime, context }
+    format
+    episodes
+    duration
+    status
+    startDate { day, month, year }
+    endDate { day, month, year}
     season
     seasonYear
-    description
-    bannerImage
-    title { romaji }
-    coverImage { extraLarge }
-    rankings { rank, type, allTime, context }
-
+    averageScore
+    studios { nodes { name, id, isAnimationStudio } }
+    source
+    hashtag
+    genres
+    synonyms
   }
 }
