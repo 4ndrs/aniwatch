@@ -12,9 +12,45 @@ import { notFound } from "next/navigation";
 import { MediaRankType } from "@/app/gql/graphql";
 import { unstable_cache } from "next/cache";
 
+import type { Metadata } from "next";
+
 type Props = {
   children: React.ReactNode;
   params: Promise<{ id: string }>;
+};
+
+export const generateMetadata = async ({
+  params,
+}: Props): Promise<Metadata> => {
+  const id = Number((await params).id);
+
+  const { anime, error } = await loadAnime(id);
+
+  if (error || !anime) {
+    return {
+      title: "Anime not found",
+      description: "The requested anime could not be found.",
+    };
+  }
+
+  const title = anime.title?.romaji || "Anime Details";
+
+  const description =
+    anime.description?.replace(/<[^>]*>/g, "") || "No description available.";
+
+  const imageUrl = anime.coverImage?.extraLarge;
+
+  return {
+    title,
+    description,
+    openGraph: {
+      title,
+      description,
+      ...(imageUrl && { images: [{ url: imageUrl }] }),
+      locale: "en_US",
+      type: "article",
+    },
+  };
 };
 
 const AnimeLayout = ({ children, params }: Props) => (
