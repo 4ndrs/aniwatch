@@ -15,7 +15,7 @@ type GraphQLBaseQueryArgs<T> = {
   callback: (args: { page: number; perPage: number }) => Promise<T>;
 };
 
-export const PER_PAGE = 10;
+export const PER_PAGE = 20;
 
 const baseQuery: BaseQueryFn<
   GraphQLBaseQueryArgs<unknown>,

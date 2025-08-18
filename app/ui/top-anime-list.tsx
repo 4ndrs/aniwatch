@@ -1,23 +1,73 @@
 "use client";
 
-import { useGetTopAnimeInfiniteQuery } from "../lib/anilist-api";
+import Link from "next/link";
+import AnimeCard from "@/app/ui/anime-card";
+
+import { useGetTopAnimeInfiniteQuery } from "@/app/lib/anilist-api";
+
+import type { TopAnimeQuery } from "@/app/gql/graphql";
 
 const TopAnimeList = () => {
-  const { data, isUninitialized, isFetching, error } =
-    useGetTopAnimeInfiniteQuery();
-
-  console.log(
-    "data:",
+  const {
     data,
-    "is unitialized:",
-    isUninitialized,
-    "is fetching:",
-    isFetching,
-    "error:",
     error,
+    isFetching,
+    hasNextPage,
+    fetchNextPage,
+    isUninitialized,
+  } = useGetTopAnimeInfiniteQuery();
+
+  const topAnime = data?.pages.reduce(
+    (acc, page) => {
+      if (!page.Page?.media) {
+        return acc;
+      }
+
+      return [...acc, ...page.Page.media];
+    },
+    [] as NonNullable<NonNullable<TopAnimeQuery["Page"]>["media"]>,
   );
 
-  return <div>hellowo</div>;
+  return (
+    <>
+      {topAnime?.map((anime) => (
+        <Link href={`/anime/${anime?.id}`} key={anime?.id} className="size-fit">
+          <AnimeCard
+            title={anime?.title?.romaji}
+            color={anime?.coverImage?.color}
+            imageUrl={anime?.coverImage?.large}
+          />
+        </Link>
+      ))}
+
+      {(isUninitialized || isFetching) && <p>Loading...</p>}
+
+      {error && <p>Error loading top anime: {error.message}</p>}
+
+      <div
+        ref={(ref) => {
+          if (!ref) {
+            return;
+          }
+
+          const observer = new IntersectionObserver(
+            (entries) => {
+              if (entries[0].isIntersecting && hasNextPage && !isFetching) {
+                fetchNextPage();
+              }
+            },
+            {
+              rootMargin: "100px",
+            },
+          );
+
+          observer.observe(ref);
+
+          return () => observer.disconnect();
+        }}
+      />
+    </>
+  );
 };
 
 export default TopAnimeList;
