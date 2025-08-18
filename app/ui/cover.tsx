@@ -25,6 +25,7 @@ const Cover = ({ src, alt, size = "sm", className }: Props) => (
     {src ? (
       <Image
         fill
+        unoptimized
         src={src}
         alt={alt ?? "cover image"}
         className="object-cover"

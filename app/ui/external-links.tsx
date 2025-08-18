@@ -39,6 +39,7 @@ const ExternalLinks = ({ links }: Props) => {
                 {link.icon ? (
                   <div className="rounded-[3px] bg-[var(--link-color)] p-1">
                     <Image
+                      unoptimized
                       width={16}
                       height={16}
                       src={link.icon}

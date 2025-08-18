@@ -165,6 +165,7 @@ const BannerImage = async ({ params }: Pick<Props, "params">) => {
   return banner ? (
     <>
       <Image
+        unoptimized
         src={banner}
         alt={
           anime?.title?.romaji
