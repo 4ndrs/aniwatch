@@ -41,7 +41,12 @@ const TopAnimeList = () => {
 
       const observer = new IntersectionObserver(
         (entries) => {
-          if (entries[0].isIntersecting && hasNextPage && !isFetching) {
+          if (
+            !error &&
+            !isFetching &&
+            hasNextPage &&
+            entries[0].isIntersecting
+          ) {
             fetchNextPage();
           }
         },
@@ -54,7 +59,7 @@ const TopAnimeList = () => {
 
       return () => observer.disconnect();
     },
-    [fetchNextPage, hasNextPage, isFetching],
+    [fetchNextPage, hasNextPage, isFetching, error],
   );
 
   return (
@@ -71,6 +76,7 @@ const TopAnimeList = () => {
 
       {(isUninitialized || isFetching) && <p>Loading...</p>}
 
+      {/* TODO: button to retry fetching/test if error clears */}
       {error && <p>Error loading top anime: {error.message}</p>}
 
       <div ref={observeIntersection} />

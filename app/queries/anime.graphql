@@ -15,7 +15,7 @@ query Anime($id: Int!) {
     season
     seasonYear
     averageScore
-    studios { nodes { name, id, isAnimationStudio } }
+    studios { edges { isMain, node { name, id, isAnimationStudio} } }
     source
     hashtag
     genres

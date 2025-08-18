@@ -34,13 +34,8 @@ const InfoPanel = ({ anime }: Props) => {
     );
   }
 
-  const studios = anime.studios?.nodes?.filter(
-    (studio) => studio?.isAnimationStudio,
-  );
-
-  const producers = anime.studios?.nodes?.filter(
-    (studio) => !studio?.isAnimationStudio,
-  );
+  const studios = anime.studios?.edges?.filter((studio) => studio?.isMain);
+  const producers = anime.studios?.edges?.filter((studio) => !studio?.isMain);
 
   // the genres is defined as string in the docs but is actually an array of strings
   const genres = (
@@ -178,7 +173,7 @@ const InfoPanel = ({ anime }: Props) => {
             <dd className="text-lighter text-xs leading-[0.975rem]">
               <ul className="flex flex-col">
                 {studios.map((studio) => (
-                  <li key={studio?.id}>{studio?.name}</li>
+                  <li key={studio?.node?.id}>{studio?.node?.name}</li>
                 ))}
               </ul>
             </dd>
@@ -193,7 +188,7 @@ const InfoPanel = ({ anime }: Props) => {
             <dd className="text-lighter text-xs leading-[0.975rem]">
               <ul className="flex flex-col">
                 {producers.map((producer) => (
-                  <li key={producer?.id}>{producer?.name}</li>
+                  <li key={producer?.node?.id}>{producer?.node?.name}</li>
                 ))}
               </ul>
             </dd>

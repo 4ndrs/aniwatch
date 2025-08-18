@@ -58,41 +58,62 @@ const frieren = {
   seasonYear: 2023,
   averageScore: 91,
   studios: {
-    nodes: [
+    edges: [
       {
-        name: "Toho",
-        id: 245,
-        isAnimationStudio: false,
+        isMain: false,
+        node: {
+          name: "Toho",
+          id: 245,
+          isAnimationStudio: false,
+        },
       },
       {
-        name: "MADHOUSE",
-        id: 11,
-        isAnimationStudio: true,
+        isMain: true,
+        node: {
+          name: "MADHOUSE",
+          id: 11,
+          isAnimationStudio: true,
+        },
       },
       {
-        name: "Shogakukan",
-        id: 6161,
-        isAnimationStudio: false,
+        isMain: false,
+        node: {
+          name: "Shogakukan",
+          id: 6161,
+          isAnimationStudio: false,
+        },
       },
       {
-        name: "Nippon Television Network",
-        id: 6620,
-        isAnimationStudio: false,
+        isMain: false,
+        node: {
+          name: "Nippon Television Network",
+          id: 6620,
+          isAnimationStudio: false,
+        },
       },
       {
-        name: "Shogakukan-Shueisha Productions",
-        id: 62,
-        isAnimationStudio: false,
+        isMain: false,
+        node: {
+          name: "Shogakukan-Shueisha Productions",
+          id: 62,
+          isAnimationStudio: false,
+        },
       },
       {
-        name: "Aniplex",
-        id: 17,
-        isAnimationStudio: false,
+        isMain: false,
+        node: {
+          name: "Aniplex",
+          id: 17,
+          isAnimationStudio: false,
+        },
       },
       {
-        name: "Dentsu",
-        id: 53,
-        isAnimationStudio: false,
+        isMain: false,
+        node: {
+          name: "Dentsu",
+          id: 53,
+          isAnimationStudio: false,
+        },
       },
     ],
   },
@@ -157,41 +178,62 @@ const gupMovie = {
   seasonYear: 2015,
   averageScore: 81,
   studios: {
-    nodes: [
+    edges: [
       {
-        name: "Actas",
-        id: 60,
-        isAnimationStudio: true,
+        isMain: true,
+        node: {
+          name: "Actas",
+          id: 60,
+          isAnimationStudio: true,
+        },
       },
       {
-        name: "Q-Tec",
-        id: 6297,
-        isAnimationStudio: false,
+        isMain: false,
+        node: {
+          name: "Q-Tec",
+          id: 6297,
+          isAnimationStudio: false,
+        },
       },
       {
-        name: "Movic",
-        id: 166,
-        isAnimationStudio: false,
+        isMain: false,
+        node: {
+          name: "Movic",
+          id: 166,
+          isAnimationStudio: false,
+        },
       },
       {
-        name: "Hakuhodo DY Music & Pictures",
-        id: 777,
-        isAnimationStudio: false,
+        isMain: false,
+        node: {
+          name: "Hakuhodo DY Music & Pictures",
+          id: 777,
+          isAnimationStudio: false,
+        },
       },
       {
-        name: "Lantis",
-        id: 104,
-        isAnimationStudio: false,
+        isMain: false,
+        node: {
+          name: "Lantis",
+          id: 104,
+          isAnimationStudio: false,
+        },
       },
       {
-        name: "Sentai Filmworks",
-        id: 376,
-        isAnimationStudio: false,
+        isMain: false,
+        node: {
+          name: "Sentai Filmworks",
+          id: 376,
+          isAnimationStudio: false,
+        },
       },
       {
-        name: "Bandai Visual",
-        id: 23,
-        isAnimationStudio: false,
+        isMain: false,
+        node: {
+          name: "Bandai Visual",
+          id: 23,
+          isAnimationStudio: false,
+        },
       },
     ],
   },
@@ -240,41 +282,62 @@ const priparis = {
   seasonYear: 2016,
   averageScore: 72,
   studios: {
-    nodes: [
+    edges: [
       {
-        name: "Tatsunoko Production",
-        id: 103,
-        isAnimationStudio: true,
+        isMain: true,
+        node: {
+          name: "Tatsunoko Production",
+          id: 103,
+          isAnimationStudio: true,
+        },
       },
       {
-        name: "Passione",
-        id: 911,
-        isAnimationStudio: true,
+        isMain: true,
+        node: {
+          name: "Passione",
+          id: 911,
+          isAnimationStudio: true,
+        },
       },
       {
-        name: "Avex Pictures",
-        id: 6429,
-        isAnimationStudio: false,
+        isMain: false,
+        node: {
+          name: "Avex Pictures",
+          id: 6429,
+          isAnimationStudio: false,
+        },
       },
       {
-        name: "Takara Tomy",
-        id: 327,
-        isAnimationStudio: false,
+        isMain: false,
+        node: {
+          name: "Takara Tomy",
+          id: 327,
+          isAnimationStudio: false,
+        },
       },
       {
-        name: "Tatsunoko Production",
-        id: 103,
-        isAnimationStudio: true,
+        isMain: false,
+        node: {
+          name: "Tatsunoko Production",
+          id: 103,
+          isAnimationStudio: true,
+        },
       },
       {
-        name: "TV Tokyo",
-        id: 16,
-        isAnimationStudio: false,
+        isMain: false,
+        node: {
+          name: "TV Tokyo",
+          id: 16,
+          isAnimationStudio: false,
+        },
       },
       {
-        name: "Aeon Entertainment",
-        id: 6619,
-        isAnimationStudio: false,
+        isMain: false,
+        node: {
+          name: "Aeon Entertainment",
+          id: 6619,
+          isAnimationStudio: false,
+        },
       },
     ],
   },
@@ -287,6 +350,131 @@ const priparis = {
 export const PriparaMovie: Story = {
   args: {
     anime: priparis,
+  },
+  render: (args) => (
+    <div
+      style={{
+        width: sizes.xl.width,
+      }}
+    >
+      <InfoPanel {...args} />
+    </div>
+  ),
+};
+
+const kusuriya = {
+  title: {
+    romaji: "Kusuriya no Hitorigoto 2nd Season",
+    english: "The Apothecary Diaries Season 2",
+    native: "薬屋のひとりごと 第2期",
+  },
+  format: MediaFormat.Tv,
+  episodes: 24,
+  duration: 24,
+  status: MediaStatus.Finished,
+  startDate: {
+    day: 10,
+    month: 1,
+    year: 2025,
+  },
+  endDate: {
+    day: 4,
+    month: 7,
+    year: 2025,
+  },
+  season: MediaSeason.Winter,
+  seasonYear: 2025,
+  averageScore: 88,
+  studios: {
+    edges: [
+      {
+        isMain: false,
+        node: {
+          name: "Toho",
+          id: 245,
+          isAnimationStudio: false,
+        },
+      },
+      {
+        isMain: true,
+        node: {
+          name: "TOHO animation STUDIO",
+          id: 7368,
+          isAnimationStudio: true,
+        },
+      },
+      {
+        isMain: true,
+        node: {
+          name: "OLM",
+          id: 28,
+          isAnimationStudio: true,
+        },
+      },
+      {
+        isMain: false,
+        node: {
+          name: "Nippon Television Network",
+          id: 6620,
+          isAnimationStudio: false,
+        },
+      },
+      {
+        isMain: false,
+        node: {
+          name: "Imagica Infos",
+          id: 7472,
+          isAnimationStudio: false,
+        },
+      },
+      {
+        isMain: false,
+        node: {
+          name: "OLM",
+          id: 28,
+          isAnimationStudio: true,
+        },
+      },
+      {
+        isMain: false,
+        node: {
+          name: "Dentsu",
+          id: 53,
+          isAnimationStudio: false,
+        },
+      },
+      {
+        isMain: false,
+        node: {
+          name: "Shogakukan",
+          id: 6161,
+          isAnimationStudio: false,
+        },
+      },
+      {
+        isMain: false,
+        node: {
+          name: "Square Enix",
+          id: 58,
+          isAnimationStudio: false,
+        },
+      },
+    ],
+  },
+  source: MediaSource.LightNovel,
+  hashtag: "#薬屋のひとりごと #薬屋２期",
+  genres: ["Drama", "Mystery"],
+  synonyms: [
+    "Die Tagebücher der Apothekerin Season 2",
+    "Diários de uma Apotecária 2ª Temporada",
+    "Монолог фармацевта 2",
+  ],
+} satisfies Anime;
+
+// edge case, OLM is both main and non-main studio
+export const KusuriyaNoHitorigoto2ndSeason: Story = {
+  args: {
+    anime: kusuriya,
   },
   render: (args) => (
     <div
