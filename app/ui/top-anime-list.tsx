@@ -3,6 +3,7 @@
 import Link from "next/link";
 import AnimeCard from "@/app/ui/anime-card";
 
+import { useCallback, useMemo } from "react";
 import { useGetTopAnimeInfiniteQuery } from "@/app/lib/anilist-api";
 
 import type { TopAnimeQuery } from "@/app/gql/graphql";
@@ -17,15 +18,43 @@ const TopAnimeList = () => {
     isUninitialized,
   } = useGetTopAnimeInfiniteQuery();
 
-  const topAnime = data?.pages.reduce(
-    (acc, page) => {
-      if (!page.Page?.media) {
-        return acc;
+  const topAnime = useMemo(
+    () =>
+      data?.pages.reduce(
+        (acc, page) => {
+          if (!page.Page?.media) {
+            return acc;
+          }
+
+          return [...acc, ...page.Page.media];
+        },
+        [] as NonNullable<NonNullable<TopAnimeQuery["Page"]>["media"]>,
+      ),
+    [data],
+  );
+
+  const observeIntersection = useCallback(
+    (ref: HTMLDivElement | null) => {
+      if (!ref) {
+        return;
       }
 
-      return [...acc, ...page.Page.media];
+      const observer = new IntersectionObserver(
+        (entries) => {
+          if (entries[0].isIntersecting && hasNextPage && !isFetching) {
+            fetchNextPage();
+          }
+        },
+        {
+          rootMargin: "100px",
+        },
+      );
+
+      observer.observe(ref);
+
+      return () => observer.disconnect();
     },
-    [] as NonNullable<NonNullable<TopAnimeQuery["Page"]>["media"]>,
+    [fetchNextPage, hasNextPage, isFetching],
   );
 
   return (
@@ -44,28 +73,7 @@ const TopAnimeList = () => {
 
       {error && <p>Error loading top anime: {error.message}</p>}
 
-      <div
-        ref={(ref) => {
-          if (!ref) {
-            return;
-          }
-
-          const observer = new IntersectionObserver(
-            (entries) => {
-              if (entries[0].isIntersecting && hasNextPage && !isFetching) {
-                fetchNextPage();
-              }
-            },
-            {
-              rootMargin: "100px",
-            },
-          );
-
-          observer.observe(ref);
-
-          return () => observer.disconnect();
-        }}
-      />
+      <div ref={observeIntersection} />
     </>
   );
 };

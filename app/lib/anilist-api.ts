@@ -27,7 +27,7 @@ const baseQuery: BaseQueryFn<
 
     return { data };
   } catch (error) {
-    console.error(`Error loading top anime on page ${page}:`, error);
+    console.error(`Error loading data on page ${page}:`, error);
 
     return { error };
   }
