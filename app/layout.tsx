@@ -1,3 +1,5 @@
+import Providers from "@/app/ui/providers";
+
 import { Overpass, Roboto } from "next/font/google";
 
 import "@/app/ui/globals.css";
@@ -31,7 +33,7 @@ export default function RootLayout({
       <body
         className={`${roboto.variable} ${overpass.variable} pb-20 antialiased`}
       >
-        {children}
+        <Providers>{children}</Providers>
       </body>
     </html>
   );

@@ -1,6 +1,8 @@
-import type { AnimeQuery } from "@/app/gql/sdk";
 import Image from "next/image";
+
 import { FaLink } from "react-icons/fa";
+
+import type { AnimeQuery } from "@/app/gql/sdk";
 
 export type Links = NonNullable<AnimeQuery["Media"]>["externalLinks"];
 
