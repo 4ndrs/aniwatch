@@ -5,16 +5,20 @@ type Props = {
   context?: string;
 };
 
-const Rating = ({ rank, context }: Props) => (
-  <p className="bg-foreground-sp relative flex items-center justify-center rounded-[3px] p-2">
-    <FaStar className="absolute top-[calc(50%-1px)] left-3 size-3 -translate-y-1/2 text-yellow-500" />
+const Rating = ({ rank, context }: Props) => {
+  if (rank == null || context == null) {
+    return;
+  }
 
-    <span className="text-text text-xs leading-[0.8625rem] font-medium capitalize">
-      {rank != null && context != null
-        ? `#${rank} ${context}`
-        : "No rating available"}
-    </span>
-  </p>
-);
+  return (
+    <p className="bg-foreground-sp relative flex items-center justify-center rounded-[3px] p-2">
+      <FaStar className="absolute top-[calc(50%-1px)] left-3 size-3 -translate-y-1/2 text-yellow-500" />
+
+      <span className="text-text text-xs leading-[0.8625rem] font-medium capitalize">
+        #{rank} {context}
+      </span>
+    </p>
+  );
+};
 
 export default Rating;
