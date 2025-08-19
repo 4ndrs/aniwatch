@@ -65,7 +65,12 @@ const TopAnimeList = () => {
   return (
     <>
       {topAnime?.map((anime) => (
-        <Link href={`/anime/${anime?.id}`} key={anime?.id} className="size-fit">
+        <Link
+          key={anime?.id}
+          prefetch={false}
+          className="size-fit"
+          href={`/anime/${anime?.id}`}
+        >
           <AnimeCard
             title={anime?.title?.romaji}
             color={anime?.coverImage?.color}
