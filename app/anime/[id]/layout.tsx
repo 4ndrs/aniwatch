@@ -35,8 +35,11 @@ export const generateMetadata = async ({
 
   const title = anime.title?.romaji || "Anime Details";
 
-  const description =
+  const rawDescription =
     anime.description?.replace(/<[^>]*>/g, "") || "No description available.";
+
+  const description =
+    rawDescription.slice(0, 160) + (rawDescription.length > 160 ? "…" : "");
 
   const imageUrl = anime.coverImage?.extraLarge;
 

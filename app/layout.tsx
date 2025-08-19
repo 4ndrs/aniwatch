@@ -21,7 +21,7 @@ const overpass = Overpass({
 const title = "AniWatch";
 
 const description =
-  "Site created as learning excercise showcasing anime data using Anilist API. Not meant to be used. For a better experience go to the original site at https://anilist.co.";
+  "Site created as a learning exercise showcasing anime data using the AniList API. Not intended for actual use. For a better experience, visit the official site at https://anilist.co.";
 
 export const metadata: Metadata = {
   title: {
