@@ -1,6 +1,7 @@
 import { Suspense } from "react";
 import { loadAnime } from "@/app/lib/server-fetchers";
 
+import StaffCard from "@/app/ui/staff-card";
 import RelationCard from "@/app/ui/relation-card";
 import CharacterCard from "@/app/ui/character-card";
 
@@ -18,6 +19,10 @@ const Overview = ({ params }: Props) => (
 
     <Suspense fallback={<div>Loading characters...</div>}>
       <Characters params={params} />
+    </Suspense>
+
+    <Suspense fallback={<div>Loading staff...</div>}>
+      <Staff params={params} />
     </Suspense>
   </div>
 );
@@ -69,4 +74,24 @@ const Characters = async ({ params }: Props) => {
   );
 };
 
+const Staff = async ({ params }: Props) => {
+  const id = Number((await params).id);
+  const staff = (await loadAnime(id))?.anime?.staff?.edges;
+
+  if (!staff?.length) {
+    return;
+  }
+
+  return (
+    <section className="space-y-2.5">
+      <h2 className="text-sm leading-4 font-medium">Staff</h2>
+
+      <div className="grid gap-x-[1.875rem] gap-y-[0.9375rem] lg:grid-cols-2 xl:grid-cols-3">
+        {staff.map((staff) => (
+          <StaffCard key={staff?.id} staff={staff} />
+        ))}
+      </div>
+    </section>
+  );
+};
 export default Overview;

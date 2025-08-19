@@ -4678,7 +4678,7 @@ export type AnimeQueryVariables = Exact<{
 }>;
 
 
-export type AnimeQuery = { __typename?: 'Query', Media?: { __typename?: 'Media', id: number, bannerImage?: string | null, description?: string | null, format?: MediaFormat | null, episodes?: number | null, duration?: number | null, status?: MediaStatus | null, season?: MediaSeason | null, seasonYear?: number | null, averageScore?: number | null, source?: MediaSource | null, hashtag?: string | null, genres?: Array<string | null> | null, synonyms?: Array<string | null> | null, coverImage?: { __typename?: 'MediaCoverImage', extraLarge?: string | null } | null, title?: { __typename?: 'MediaTitle', romaji?: string | null, english?: string | null, native?: string | null } | null, rankings?: Array<{ __typename?: 'MediaRank', rank: number, type: MediaRankType, allTime?: boolean | null, context: string } | null> | null, startDate?: { __typename?: 'FuzzyDate', day?: number | null, month?: number | null, year?: number | null } | null, endDate?: { __typename?: 'FuzzyDate', day?: number | null, month?: number | null, year?: number | null } | null, studios?: { __typename?: 'StudioConnection', edges?: Array<{ __typename?: 'StudioEdge', isMain: boolean, node?: { __typename?: 'Studio', name: string, id: number, isAnimationStudio: boolean } | null } | null> | null } | null, externalLinks?: Array<{ __typename?: 'MediaExternalLink', icon?: string | null, color?: string | null, language?: string | null, site: string, url?: string | null, id: number } | null> | null, relations?: { __typename?: 'MediaConnection', edges?: Array<{ __typename?: 'MediaEdge', id?: number | null, relationType?: MediaRelation | null, node?: { __typename?: 'Media', format?: MediaFormat | null, status?: MediaStatus | null, title?: { __typename?: 'MediaTitle', romaji?: string | null } | null, coverImage?: { __typename?: 'MediaCoverImage', medium?: string | null } | null } | null } | null> | null } | null, characters?: { __typename?: 'CharacterConnection', edges?: Array<{ __typename?: 'CharacterEdge', id?: number | null, role?: CharacterRole | null, node?: { __typename?: 'Character', name?: { __typename?: 'CharacterName', last?: string | null, first?: string | null } | null, image?: { __typename?: 'CharacterImage', large?: string | null } | null } | null, voiceActors?: Array<{ __typename?: 'Staff', name?: { __typename?: 'StaffName', first?: string | null, last?: string | null } | null, image?: { __typename?: 'StaffImage', large?: string | null } | null } | null> | null } | null> | null } | null } | null };
+export type AnimeQuery = { __typename?: 'Query', Media?: { __typename?: 'Media', id: number, bannerImage?: string | null, description?: string | null, format?: MediaFormat | null, episodes?: number | null, duration?: number | null, status?: MediaStatus | null, season?: MediaSeason | null, seasonYear?: number | null, averageScore?: number | null, source?: MediaSource | null, hashtag?: string | null, genres?: Array<string | null> | null, synonyms?: Array<string | null> | null, coverImage?: { __typename?: 'MediaCoverImage', extraLarge?: string | null } | null, title?: { __typename?: 'MediaTitle', romaji?: string | null, english?: string | null, native?: string | null } | null, rankings?: Array<{ __typename?: 'MediaRank', rank: number, type: MediaRankType, allTime?: boolean | null, context: string } | null> | null, startDate?: { __typename?: 'FuzzyDate', day?: number | null, month?: number | null, year?: number | null } | null, endDate?: { __typename?: 'FuzzyDate', day?: number | null, month?: number | null, year?: number | null } | null, studios?: { __typename?: 'StudioConnection', edges?: Array<{ __typename?: 'StudioEdge', isMain: boolean, node?: { __typename?: 'Studio', name: string, id: number, isAnimationStudio: boolean } | null } | null> | null } | null, externalLinks?: Array<{ __typename?: 'MediaExternalLink', icon?: string | null, color?: string | null, language?: string | null, site: string, url?: string | null, id: number } | null> | null, relations?: { __typename?: 'MediaConnection', edges?: Array<{ __typename?: 'MediaEdge', id?: number | null, relationType?: MediaRelation | null, node?: { __typename?: 'Media', format?: MediaFormat | null, status?: MediaStatus | null, title?: { __typename?: 'MediaTitle', romaji?: string | null } | null, coverImage?: { __typename?: 'MediaCoverImage', medium?: string | null } | null } | null } | null> | null } | null, characters?: { __typename?: 'CharacterConnection', edges?: Array<{ __typename?: 'CharacterEdge', id?: number | null, role?: CharacterRole | null, node?: { __typename?: 'Character', name?: { __typename?: 'CharacterName', last?: string | null, first?: string | null } | null, image?: { __typename?: 'CharacterImage', large?: string | null } | null } | null, voiceActors?: Array<{ __typename?: 'Staff', name?: { __typename?: 'StaffName', first?: string | null, last?: string | null } | null, image?: { __typename?: 'StaffImage', large?: string | null } | null } | null> | null } | null> | null } | null, staff?: { __typename?: 'StaffConnection', edges?: Array<{ __typename?: 'StaffEdge', id?: number | null, role?: string | null, node?: { __typename?: 'Staff', name?: { __typename?: 'StaffName', last?: string | null, first?: string | null } | null, image?: { __typename?: 'StaffImage', large?: string | null } | null } | null } | null> | null } | null } | null };
 
 export type TopAnimeQueryVariables = Exact<{
   page: Scalars['Int']['input'];
@@ -4764,7 +4764,7 @@ export const AnimeDocument = gql`
         }
       }
     }
-    characters(perPage: 6) {
+    characters(perPage: 6, sort: RELEVANCE) {
       edges {
         id
         role
@@ -4781,6 +4781,21 @@ export const AnimeDocument = gql`
           name {
             first
             last
+          }
+          image {
+            large
+          }
+        }
+      }
+    }
+    staff(perPage: 3, sort: RELEVANCE) {
+      edges {
+        id
+        role
+        node {
+          name {
+            last
+            first
           }
           image {
             large

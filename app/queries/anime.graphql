@@ -72,7 +72,7 @@ query Anime($id: Int!) {
         }
       }
     }
-    characters(perPage: 6) {
+    characters(perPage: 6, sort: RELEVANCE) {
       edges {
         id
         role
@@ -89,6 +89,21 @@ query Anime($id: Int!) {
           name {
             first
             last
+          }
+          image {
+            large
+          }
+        }
+      }
+    }
+    staff (perPage: 3, sort: RELEVANCE) {
+      edges {
+        id
+        role
+        node {
+          name {
+            last
+            first
           }
           image {
             large
