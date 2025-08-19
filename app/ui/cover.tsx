@@ -30,7 +30,7 @@ const Cover = ({ src, alt, size = "sm", className }: Props) => (
         className="object-cover"
       />
     ) : (
-      <span className="font-(family-name:--font-overpass) text-xl font-bold text-gray-600 group-data-[size=md]:text-sm group-data-[size=sm]:text-center group-data-[size=sm]:text-xs group-data-[size=xl]:text-3xl">
+      <span className="text-center font-(family-name:--font-overpass) text-xl font-bold text-gray-600 group-data-[size=md]:text-sm group-data-[size=sm]:text-center group-data-[size=sm]:text-sm group-data-[size=xl]:text-3xl group-data-[size=xs]:text-xs">
         No Image
       </span>
     )}

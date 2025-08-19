@@ -1,9 +1,13 @@
 import { MediaFormat, MediaStatus } from "@/app/gql/sdk";
 
 export const sizes = {
-  sm: {
+  xs: {
     width: "52px",
     height: "70px",
+  },
+  sm: {
+    width: "60px",
+    height: "80px",
   },
   md: {
     width: "85px",

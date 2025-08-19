@@ -72,5 +72,29 @@ query Anime($id: Int!) {
         }
       }
     }
+    characters(perPage: 6) {
+      edges {
+        id
+        role
+        node {
+          name {
+            last
+            first
+          }
+          image {
+            large
+          }
+        }
+        voiceActors (language: JAPANESE) {
+          name {
+            first
+            last
+          }
+          image {
+            large
+          }
+        }
+      }
+    }
   }
 }

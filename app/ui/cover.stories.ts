@@ -11,6 +11,12 @@ type Story = StoryObj<typeof meta>;
 
 export default meta;
 
+export const DefaultXS: Story = {
+  args: {
+    size: "xs",
+  },
+};
+
 export const DefaultSM: Story = {
   args: {
     size: "sm",
