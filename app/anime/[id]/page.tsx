@@ -3,6 +3,7 @@ import { loadAnime } from "@/app/lib/server-fetchers";
 
 import AnimeCard from "@/app/ui/anime-card";
 import StaffCard from "@/app/ui/staff-card";
+import ReviewCard from "@/app/ui/review-card";
 import RelationCard from "@/app/ui/relation-card";
 import CharacterCard from "@/app/ui/character-card";
 
@@ -28,6 +29,10 @@ const Overview = ({ params }: Props) => (
 
     <Suspense fallback={<div>Loading recommendations...</div>}>
       <Recommendations params={params} />
+    </Suspense>
+
+    <Suspense fallback={<div>Loading reviews...</div>}>
+      <Reviews params={params} />
     </Suspense>
   </div>
 );
@@ -116,11 +121,32 @@ const Recommendations = async ({ params }: Props) => {
         {recommendations.map((recommendation) => (
           <AnimeCard
             size="xm"
-            color="var(--color-text-lighter)"
             key={recommendation?.id}
+            color="var(--color-text-lighter)"
             title={recommendation?.mediaRecommendation?.title?.romaji}
             imageUrl={recommendation?.mediaRecommendation?.coverImage?.large}
           />
+        ))}
+      </div>
+    </section>
+  );
+};
+
+const Reviews = async ({ params }: Props) => {
+  const id = Number((await params).id);
+  const reviews = (await loadAnime(id))?.anime?.reviews?.nodes;
+
+  if (!reviews?.length) {
+    return;
+  }
+
+  return (
+    <section className="space-y-2.5">
+      <h2 className="text-sm leading-4 font-medium">Reviews</h2>
+
+      <div className="grid gap-5 gap-x-[1.875rem] lg:grid-cols-2">
+        {reviews.map((review) => (
+          <ReviewCard key={review?.id} review={review} />
         ))}
       </div>
     </section>

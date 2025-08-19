@@ -18,7 +18,7 @@ const Cover = ({ src, alt, size = "sm", className }: Props) => (
       height: sizes[size].height,
     }}
     className={twMerge(
-      "group relative flex items-center justify-center overflow-hidden bg-gray-800",
+      "group relative flex items-center justify-center overflow-hidden bg-gray-800 data-[size=profile]:bg-transparent",
       className,
     )}
   >
@@ -30,7 +30,7 @@ const Cover = ({ src, alt, size = "sm", className }: Props) => (
         className="object-cover"
       />
     ) : (
-      <span className="text-center font-(family-name:--font-overpass) text-xl font-bold text-gray-600 group-data-[size=md]:text-sm group-data-[size=sm]:text-center group-data-[size=sm]:text-sm group-data-[size=xl]:text-3xl group-data-[size=xs]:text-xs">
+      <span className="text-center font-(family-name:--font-overpass) text-xl font-bold text-gray-600 group-data-[size=md]:text-sm group-data-[size=profile]:text-xs group-data-[size=sm]:text-center group-data-[size=sm]:text-sm group-data-[size=xl]:text-3xl group-data-[size=xs]:text-xs">
         No Image
       </span>
     )}

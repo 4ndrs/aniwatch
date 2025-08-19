@@ -1,6 +1,10 @@
 import { MediaFormat, MediaStatus } from "@/app/gql/sdk";
 
 export const sizes = {
+  profile: {
+    width: "50px",
+    height: "50px",
+  },
   xs: {
     width: "52px",
     height: "70px",

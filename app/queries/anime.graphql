@@ -124,5 +124,18 @@ query Anime($id: Int!) {
         }
       }
     }
+   reviews (perPage: 4) {
+      nodes {
+        id
+        summary
+        rating
+        user {
+          name
+          avatar {
+            medium
+          }
+        }
+      }
+    }
   }
 }
