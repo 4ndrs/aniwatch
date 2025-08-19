@@ -1,4 +1,5 @@
 import { MediaFormat } from "@/app/gql/graphql";
+import { MediaFormatDisplayMap, MediaStatusDisplayMap } from "@/app/ui/utils";
 
 import type { AnimeQuery } from "@/app/gql/sdk";
 
@@ -84,7 +85,7 @@ const InfoPanel = ({ anime }: Props) => {
               Status
             </dt>
             <dd className="text-lighter text-xs leading-[0.975rem] capitalize">
-              {anime.status.toLowerCase()}
+              {MediaStatusDisplayMap[anime.status]}
             </dd>
           </div>
         )}
@@ -306,19 +307,6 @@ const formatDate = (date: { day: number; month: number; year: number }) => {
     year: "numeric",
     day: "numeric",
   }).format(newDate);
-};
-
-const MediaFormatDisplayMap: Record<MediaFormat, string> = {
-  [MediaFormat.Tv]: "TV",
-  [MediaFormat.Movie]: "Movie",
-  [MediaFormat.Ova]: "OVA",
-  [MediaFormat.Ona]: "ONA",
-  [MediaFormat.Special]: "Special",
-  [MediaFormat.Music]: "Music",
-  [MediaFormat.TvShort]: "TV Short",
-  [MediaFormat.Manga]: "Manga",
-  [MediaFormat.OneShot]: "One Shot",
-  [MediaFormat.Novel]: "Novel",
 };
 
 export default InfoPanel;

@@ -1,11 +1,19 @@
-query TopAnime($page:Int!, $perPage:Int!) {
-  Page(page:$page, perPage:$perPage){
-    pageInfo { hasNextPage }
-    media(type:ANIME, sort: SCORE_DESC){
+query TopAnime($page: Int!, $perPage: Int!) {
+  Page(page: $page, perPage: $perPage) {
+    pageInfo {
+      hasNextPage
+    }
+    media(type: ANIME, sort: SCORE_DESC) {
       id
-      title { romaji }
-      coverImage { large color }
+      title {
+        romaji
+      }
+      coverImage {
+        color
+        large
+      }
       averageScore
     }
   }
 }
+

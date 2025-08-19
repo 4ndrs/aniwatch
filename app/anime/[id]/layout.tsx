@@ -5,12 +5,11 @@ import InfoPanel from "@/app/ui/info-panel";
 import Description from "@/app/ui/description";
 import ExternalLinks from "@/app/ui/external-links";
 
-import { sdk } from "@/app/lib/anilist";
 import { sizes } from "@/app/ui/utils";
 import { Suspense } from "react";
 import { notFound } from "next/navigation";
+import { loadAnime } from "@/app/lib/server-fetchers";
 import { MediaRankType } from "@/app/gql/graphql";
-import { unstable_cache } from "next/cache";
 
 import type { Metadata } from "next";
 
@@ -106,25 +105,6 @@ const AnimeLayout = ({ children, params }: Props) => (
       {children}
     </div>
   </main>
-);
-
-const loadAnime = unstable_cache(
-  async (id: number) => {
-    try {
-      const anime = (await sdk.Anime({ id })).Media;
-
-      if (!anime) {
-        throw new Error("Anime not found");
-      }
-
-      return { anime, error: false } as const;
-    } catch (error) {
-      console.error(`Error loading anime with id ${id}:`, error);
-      return { error: true } as const;
-    }
-  },
-  undefined,
-  { revalidate: 86400 }, // Cache for 24 hours
 );
 
 const MainInfo = async ({ params }: Pick<Props, "params">) => {

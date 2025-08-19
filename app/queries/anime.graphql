@@ -1,26 +1,76 @@
 query Anime($id: Int!) {
-  Media(type: ANIME,id: $id) {
+  Media(type: ANIME, id: $id) {
     id
     bannerImage
     description
-    coverImage { extraLarge }
-    title { romaji, english, native }
-    rankings { rank, type, allTime, context }
+    coverImage {
+      extraLarge
+    }
+    title {
+      romaji
+      english
+      native
+    }
+    rankings {
+      rank
+      type
+      allTime
+      context
+    }
     format
     episodes
     duration
     status
-    startDate { day, month, year }
-    endDate { day, month, year}
+    startDate {
+      day
+      month
+      year
+    }
+    endDate {
+      day
+      month
+      year
+    }
     season
     seasonYear
     averageScore
-    studios { edges { isMain, node { name, id, isAnimationStudio} } }
+    studios {
+      edges {
+        isMain
+        node {
+          name
+          id
+          isAnimationStudio
+        }
+      }
+    }
     source
     hashtag
     genres
     synonyms
-    externalLinks { icon, color, language, site, url, id }
-
+    externalLinks {
+      icon
+      color
+      language
+      site
+      url
+      id
+    }
+    relations {
+      edges {
+        id
+        relationType (version: 2)
+        node {
+          title {
+            romaji
+          }
+          coverImage {
+            medium
+          }
+          format
+          status
+        }
+      }
+    }
   }
 }
