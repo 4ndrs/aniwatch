@@ -1,6 +1,7 @@
 import { Suspense } from "react";
 import { loadAnime } from "@/app/lib/server-fetchers";
 
+import AnimeCard from "@/app/ui/anime-card";
 import StaffCard from "@/app/ui/staff-card";
 import RelationCard from "@/app/ui/relation-card";
 import CharacterCard from "@/app/ui/character-card";
@@ -12,7 +13,7 @@ type Props = {
 };
 
 const Overview = ({ params }: Props) => (
-  <div className="space-y-5">
+  <div className="space-y-7.5">
     <Suspense fallback={<div>Loading relations...</div>}>
       <Relations params={params} />
     </Suspense>
@@ -23,6 +24,10 @@ const Overview = ({ params }: Props) => (
 
     <Suspense fallback={<div>Loading staff...</div>}>
       <Staff params={params} />
+    </Suspense>
+
+    <Suspense fallback={<div>Loading recommendations...</div>}>
+      <Recommendations params={params} />
     </Suspense>
   </div>
 );
@@ -94,4 +99,32 @@ const Staff = async ({ params }: Props) => {
     </section>
   );
 };
+
+const Recommendations = async ({ params }: Props) => {
+  const id = Number((await params).id);
+  const recommendations = (await loadAnime(id))?.anime?.recommendations?.nodes;
+
+  if (!recommendations?.length) {
+    return;
+  }
+
+  return (
+    <section className="space-y-2.5">
+      <h2 className="text-sm leading-4 font-medium">Recommendations</h2>
+
+      <div className="grid gap-5 gap-x-[1.875rem] sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 2xl:grid-cols-7">
+        {recommendations.map((recommendation) => (
+          <AnimeCard
+            size="xm"
+            color="var(--color-text-lighter)"
+            key={recommendation?.id}
+            title={recommendation?.mediaRecommendation?.title?.romaji}
+            imageUrl={recommendation?.mediaRecommendation?.coverImage?.large}
+          />
+        ))}
+      </div>
+    </section>
+  );
+};
+
 export default Overview;

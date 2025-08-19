@@ -111,5 +111,18 @@ query Anime($id: Int!) {
         }
       }
     }
+    recommendations (perPage: 7, sort: [RATING_DESC, ID]){
+      nodes {
+        id
+        mediaRecommendation {
+          title {
+            romaji
+          }
+          coverImage {
+            large
+          }
+        }
+      }
+    }
   }
 }

@@ -29,6 +29,12 @@ export const DefaultMD: Story = {
   },
 };
 
+export const DefaultXM: Story = {
+  args: {
+    size: "xm",
+  },
+};
+
 export const DefaultLG: Story = {
   args: {
     size: "lg",

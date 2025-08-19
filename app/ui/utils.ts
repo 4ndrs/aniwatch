@@ -13,6 +13,10 @@ export const sizes = {
     width: "85px",
     height: "115px",
   },
+  xm: {
+    width: "130px",
+    height: "180px",
+  },
   lg: {
     width: "185px",
     height: "265px",
