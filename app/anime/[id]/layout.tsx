@@ -14,14 +14,12 @@ import { MediaRankType } from "@/app/gql/graphql";
 
 import type { Metadata } from "next";
 
-type Props = {
-  children: React.ReactNode;
-  params: Promise<{ id: string }>;
-};
+type Props = LayoutProps<"/anime/[id]">;
+type CommonProps = Pick<Props, "params">;
 
 export const generateMetadata = async ({
   params,
-}: Props): Promise<Metadata> => {
+}: CommonProps): Promise<Metadata> => {
   const id = Number((await params).id);
 
   const { anime, error } = await loadAnime(id);
@@ -110,7 +108,7 @@ const AnimeLayout = ({ children, params }: Props) => (
   </main>
 );
 
-const MainInfo = async ({ params }: Pick<Props, "params">) => {
+const MainInfo = async ({ params }: CommonProps) => {
   const id = Number((await params).id);
 
   const { error, anime } = await loadAnime(id);
@@ -124,7 +122,7 @@ const MainInfo = async ({ params }: Pick<Props, "params">) => {
   );
 };
 
-const MainImage = async ({ params }: Pick<Props, "params">) => {
+const MainImage = async ({ params }: CommonProps) => {
   const id = Number((await params).id);
 
   const { anime } = await loadAnime(id);
@@ -141,7 +139,7 @@ const MainImage = async ({ params }: Pick<Props, "params">) => {
   );
 };
 
-const BannerImage = async ({ params }: Pick<Props, "params">) => {
+const BannerImage = async ({ params }: CommonProps) => {
   const id = Number((await params).id);
 
   const { anime } = await loadAnime(id);
@@ -166,7 +164,7 @@ const BannerImage = async ({ params }: Pick<Props, "params">) => {
   ) : undefined;
 };
 
-const Rankings = async ({ params }: Pick<Props, "params">) => {
+const Rankings = async ({ params }: CommonProps) => {
   const id = Number((await params).id);
 
   const { anime } = await loadAnime(id);
@@ -179,7 +177,7 @@ const Rankings = async ({ params }: Pick<Props, "params">) => {
   return <Rating rank={rating?.rank} context={rating?.context} />;
 };
 
-const SideInfoPanel = async ({ params }: Pick<Props, "params">) => {
+const SideInfoPanel = async ({ params }: CommonProps) => {
   const id = Number((await params).id);
 
   const { anime } = await loadAnime(id);
@@ -187,7 +185,7 @@ const SideInfoPanel = async ({ params }: Pick<Props, "params">) => {
   return <InfoPanel anime={anime} />;
 };
 
-const ExLinks = async ({ params }: Pick<Props, "params">) => {
+const ExLinks = async ({ params }: CommonProps) => {
   const id = Number((await params).id);
 
   const { anime } = await loadAnime(id);

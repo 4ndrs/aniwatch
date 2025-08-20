@@ -9,6 +9,7 @@ const nextConfig: NextConfig = {
   experimental: {
     scrollRestoration: false,
   },
+  typedRoutes: true,
 };
 
 export default nextConfig;

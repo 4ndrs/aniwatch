@@ -7,11 +7,8 @@ import ReviewCard, { ReviewCardSkeleton } from "@/app/ui/review-card";
 import RelationCard, { RelationCardSkeleton } from "@/app/ui/relation-card";
 import CharacterCard, { CharacterCardSkeleton } from "@/app/ui/character-card";
 
-type Props = {
-  params: Promise<{
-    id: string;
-  }>;
-};
+type Props = PageProps<"/anime/[id]">;
+type CommonProps = Pick<Props, "params">;
 
 const Overview = ({ params }: Props) => (
   <div className="space-y-7.5">
@@ -97,7 +94,7 @@ const Overview = ({ params }: Props) => (
   </div>
 );
 
-const Relations = async ({ params }: Props) => {
+const Relations = async ({ params }: CommonProps) => {
   const id = Number((await params).id);
   const relations = (await loadAnime(id))?.anime?.relations;
 
@@ -118,7 +115,7 @@ const Relations = async ({ params }: Props) => {
   );
 };
 
-const Characters = async ({ params }: Props) => {
+const Characters = async ({ params }: CommonProps) => {
   const id = Number((await params).id);
   const characters = (await loadAnime(id))?.anime?.characters?.edges;
 
@@ -144,7 +141,7 @@ const Characters = async ({ params }: Props) => {
   );
 };
 
-const Staff = async ({ params }: Props) => {
+const Staff = async ({ params }: CommonProps) => {
   const id = Number((await params).id);
   const staff = (await loadAnime(id))?.anime?.staff?.edges;
 
@@ -165,7 +162,7 @@ const Staff = async ({ params }: Props) => {
   );
 };
 
-const Recommendations = async ({ params }: Props) => {
+const Recommendations = async ({ params }: CommonProps) => {
   const id = Number((await params).id);
   const recommendations = (await loadAnime(id))?.anime?.recommendations?.nodes;
 
@@ -192,7 +189,7 @@ const Recommendations = async ({ params }: Props) => {
   );
 };
 
-const Reviews = async ({ params }: Props) => {
+const Reviews = async ({ params }: CommonProps) => {
   const id = Number((await params).id);
   const reviews = (await loadAnime(id))?.anime?.reviews?.nodes;
 
