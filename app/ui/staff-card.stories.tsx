@@ -1,4 +1,4 @@
-import StaffCard from "@/app/ui/staff-card";
+import StaffCard, { StaffCardSkeleton } from "@/app/ui/staff-card";
 
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 
@@ -11,11 +11,21 @@ type Story = StoryObj<typeof meta>;
 
 export default meta;
 
-export const Default: Story = {
+export const DefaultWithSkeleton: Story = {
   args: {},
+  render: (args) => (
+    <div className="flex gap-2">
+      <div className="w-[337.33px]">
+        <StaffCard {...args} />
+      </div>
+      <div className="w-[337.33px]">
+        <StaffCardSkeleton />
+      </div>
+    </div>
+  ),
 };
 
-export const YamadaKanehito: Story = {
+export const YamadaKanehitoWithSkeleton: Story = {
   args: {
     staff: {
       id: 612615,
@@ -33,13 +43,18 @@ export const YamadaKanehito: Story = {
     },
   },
   render: (args) => (
-    <div className="w-[337.33px]">
-      <StaffCard {...args} />
+    <div className="flex gap-2">
+      <div className="w-[337.33px]">
+        <StaffCard {...args} />
+      </div>
+      <div className="w-[337.33px]">
+        <StaffCardSkeleton />
+      </div>
     </div>
   ),
 };
 
-export const AbeTsukasa: Story = {
+export const AbeTsukasaWithSkeleton: Story = {
   args: {
     staff: {
       id: 612616,
@@ -57,8 +72,13 @@ export const AbeTsukasa: Story = {
     },
   },
   render: (args) => (
-    <div className="w-[337.33px]">
-      <StaffCard {...args} />
+    <div className="flex gap-2">
+      <div className="w-[337.33px]">
+        <StaffCard {...args} />
+      </div>
+      <div className="w-[337.33px]">
+        <StaffCardSkeleton />
+      </div>
     </div>
   ),
 };

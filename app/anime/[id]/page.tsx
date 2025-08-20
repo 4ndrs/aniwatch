@@ -1,9 +1,9 @@
 import { Suspense } from "react";
 import { loadAnime } from "@/app/lib/server-fetchers";
 
-import AnimeCard from "@/app/ui/anime-card";
-import StaffCard from "@/app/ui/staff-card";
-import ReviewCard from "@/app/ui/review-card";
+import AnimeCard, { AnimeCardSkeleton } from "@/app/ui/anime-card";
+import StaffCard, { StaffCardSkeleton } from "@/app/ui/staff-card";
+import ReviewCard, { ReviewCardSkeleton } from "@/app/ui/review-card";
 import RelationCard, { RelationCardSkeleton } from "@/app/ui/relation-card";
 import CharacterCard, { CharacterCardSkeleton } from "@/app/ui/character-card";
 
@@ -47,15 +47,51 @@ const Overview = ({ params }: Props) => (
       <Characters params={params} />
     </Suspense>
 
-    <Suspense fallback={<div>Loading staff...</div>}>
+    <Suspense
+      fallback={
+        <section className="space-y-2.5">
+          <h2 className="text-sm leading-4 font-medium">Staff</h2>
+
+          <div className="grid gap-x-[1.875rem] gap-y-[0.9375rem] lg:grid-cols-2 xl:grid-cols-3">
+            {Array.from({ length: 3 }).map((_, index) => (
+              <StaffCardSkeleton key={index} />
+            ))}
+          </div>
+        </section>
+      }
+    >
       <Staff params={params} />
     </Suspense>
 
-    <Suspense fallback={<div>Loading recommendations...</div>}>
+    <Suspense
+      fallback={
+        <section className="space-y-2.5">
+          <h2 className="text-sm leading-4 font-medium">Recommendations</h2>
+
+          <div className="grid gap-5 gap-x-[1.875rem] sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 2xl:grid-cols-7">
+            {Array.from({ length: 7 }).map((_, index) => (
+              <AnimeCardSkeleton size="xm" key={index} />
+            ))}
+          </div>
+        </section>
+      }
+    >
       <Recommendations params={params} />
     </Suspense>
 
-    <Suspense fallback={<div>Loading reviews...</div>}>
+    <Suspense
+      fallback={
+        <section className="space-y-2.5">
+          <h2 className="text-sm leading-4 font-medium">Reviews</h2>
+
+          <div className="grid gap-5 gap-x-[1.875rem] lg:grid-cols-2">
+            {Array.from({ length: 4 }).map((_, index) => (
+              <ReviewCardSkeleton key={index} />
+            ))}
+          </div>
+        </section>
+      }
+    >
       <Reviews params={params} />
     </Suspense>
   </div>

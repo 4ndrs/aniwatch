@@ -1,4 +1,4 @@
-import ReviewCard from "@/app/ui/review-card";
+import ReviewCard, { ReviewCardSkeleton } from "@/app/ui/review-card";
 
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 
@@ -11,11 +11,21 @@ type Story = StoryObj<typeof meta>;
 
 export default meta;
 
-export const Default: Story = {
+export const DefaultWithSkeleton: Story = {
   args: {},
+  render: (args) => (
+    <div className="flex gap-2">
+      <div className="w-[381px]">
+        <ReviewCard {...args} />
+      </div>
+      <div className="w-[381px]">
+        <ReviewCardSkeleton />
+      </div>
+    </div>
+  ),
 };
 
-export const FrierenReview: Story = {
+export const FrierenReviewWithSkeleton: Story = {
   args: {
     review: {
       id: 23847,
@@ -32,13 +42,18 @@ export const FrierenReview: Story = {
     },
   },
   render: (args) => (
-    <div className="w-[381px]">
-      <ReviewCard {...args} />
+    <div className="flex gap-2">
+      <div className="w-[381px]">
+        <ReviewCard {...args} />
+      </div>
+      <div className="w-[381px]">
+        <ReviewCardSkeleton />
+      </div>
     </div>
   ),
 };
 
-export const FrierenReview2: Story = {
+export const FrierenReview2WithSkeleton: Story = {
   args: {
     review: {
       id: 23852,
@@ -54,8 +69,13 @@ export const FrierenReview2: Story = {
     },
   },
   render: (args) => (
-    <div className="w-[381px]">
-      <ReviewCard {...args} />
+    <div className="flex gap-2">
+      <div className="w-[381px]">
+        <ReviewCard {...args} />
+      </div>
+      <div className="w-[381px]">
+        <ReviewCardSkeleton />
+      </div>
     </div>
   ),
 };

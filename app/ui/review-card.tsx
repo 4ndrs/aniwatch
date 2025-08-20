@@ -1,7 +1,9 @@
-import Cover from "@/app/ui/cover";
+import Skeleton from "@/app/ui/skeleton";
 
 import { AnimeQuery } from "@/app/gql/sdk";
 import { FaThumbsUp } from "react-icons/fa";
+
+import Cover, { CoverSkeleton } from "@/app/ui/cover";
 
 type Review = NonNullable<
   NonNullable<NonNullable<AnimeQuery["Media"]>["reviews"]>["nodes"]
@@ -42,5 +44,26 @@ const ReviewCard = ({ review }: Props) => {
     </article>
   );
 };
+
+export const ReviewCardSkeleton = () => (
+  <div aria-hidden>
+    <div className="flex gap-5">
+      <CoverSkeleton size="profile" className="shrink-0 rounded-sm" />
+
+      <div className="bg-foreground-sp relative flex-1 rounded-sm py-[0.8125rem] pr-[1.5625rem] pl-[0.9375rem] text-center after:absolute after:top-3 after:left-[-0.5625rem] after:size-2.5 after:[border-width:6px_9px_6px_0] after:[border-style:solid] after:[border-color:transparent_var(--color-foreground-sp)_transparent_transparent] after:content-['']">
+        <div className="flex flex-col items-center gap-2 text-sm leading-[1.225rem] italic">
+          <Skeleton className="w-full">long first line</Skeleton>
+
+          <Skeleton>last review line</Skeleton>
+        </div>
+
+        <span className="text-text-lighter absolute right-2.5 bottom-2.5 flex items-center gap-1 text-[0.8125rem] leading-[0.934375rem]">
+          <FaThumbsUp className="size-3" />
+          <Skeleton>100</Skeleton>
+        </span>
+      </div>
+    </div>
+  </div>
+);
 
 export default ReviewCard;

@@ -1,4 +1,6 @@
-import Cover from "@/app/ui/cover";
+import Skeleton from "@/app/ui/skeleton";
+
+import Cover, { CoverSkeleton } from "@/app/ui/cover";
 
 import type { AnimeQuery } from "@/app/gql/sdk";
 
@@ -55,5 +57,24 @@ const StaffCard = ({ staff }: Props) => {
     </article>
   );
 };
+
+export const StaffCardSkeleton = () => (
+  <div
+    aria-hidden
+    className="bg-foreground-sp flex justify-between overflow-hidden rounded-[3px]"
+  >
+    <div className="flex">
+      <CoverSkeleton size="xs" />
+
+      <div className="flex flex-col justify-between p-2.5">
+        <Skeleton className="text-xs leading-[0.975rem]">Nitro Plus</Skeleton>
+
+        <Skeleton className="text-[0.6875rem] leading-[0.790625rem] capitalize">
+          Original Creator
+        </Skeleton>
+      </div>
+    </div>
+  </div>
+);
 
 export default StaffCard;
