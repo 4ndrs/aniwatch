@@ -1,4 +1,5 @@
-import Cover from "@/app/ui/cover";
+import Skeleton from "@/app/ui/skeleton";
+import Cover, { CoverSkeleton } from "@/app/ui/cover";
 
 import { sizes } from "@/app/ui/utils";
 
@@ -25,6 +26,16 @@ const AnimeCard = ({ imageUrl, title, color, size = "lg" }: Props) => (
       {title ?? "No Title"}
     </h2>
   </article>
+);
+
+export const AnimeCardSkeleton = ({ size = "lg" }: Pick<Props, "size">) => (
+  <div className="flex size-fit flex-col gap-2.5">
+    <CoverSkeleton size={size} className="rounded-sm" />
+
+    <Skeleton className="line-clamp-2 max-w-full font-(family-name:--font-overpass) text-sm font-semibold text-wrap">
+      Sousou no Frieren
+    </Skeleton>
+  </div>
 );
 
 export default AnimeCard;

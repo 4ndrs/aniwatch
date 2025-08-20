@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Skeleton from "@/app/ui/skeleton";
 
 import { sizes } from "@/app/ui/utils";
 import { twMerge } from "tailwind-merge";
@@ -36,4 +37,15 @@ const Cover = ({ src, alt, size = "sm", className }: Props) => (
     )}
   </div>
 );
+
+export const CoverSkeleton = ({
+  size = "sm",
+  className,
+}: Pick<Props, "size" | "className">) => (
+  <Skeleton
+    className={className}
+    style={{ width: sizes[size].width, height: sizes[size].height }}
+  />
+);
+
 export default Cover;

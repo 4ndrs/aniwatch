@@ -1,10 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import AnimeCard from "@/app/ui/anime-card";
+import AnimeCard, { AnimeCardSkeleton } from "@/app/ui/anime-card";
 
 import { useCallback, useMemo } from "react";
-import { useGetTopAnimeInfiniteQuery } from "@/app/lib/anilist-api";
+import { PER_PAGE, useGetTopAnimeInfiniteQuery } from "@/app/lib/anilist-api";
 
 import type { TopAnimeQuery } from "@/app/gql/graphql";
 
@@ -74,7 +74,10 @@ const TopAnimeList = () => {
         </Link>
       ))}
 
-      {(isUninitialized || isFetching) && <p>Loading...</p>}
+      {(isUninitialized || isFetching) &&
+        Array.from({ length: PER_PAGE }).map((_, index) => (
+          <AnimeCardSkeleton key={index} />
+        ))}
 
       {/* TODO: button to retry fetching/test if error clears */}
       {error && <p>Error loading top anime: {error.message}</p>}
