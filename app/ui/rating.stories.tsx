@@ -1,6 +1,6 @@
-import Rating from "@/app/ui/rating";
+import Rating, { RatingSkeleton } from "@/app/ui/rating";
 
-import { sizes } from "./utils";
+import { sizes } from "@/app/ui/utils";
 
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 
@@ -27,19 +27,28 @@ export const Default: Story = {
   ),
 };
 
-export const HighestRated: Story = {
+export const HighestRatedAndSkeleton: Story = {
   args: {
     rank: 1,
     context: "highest rated all time",
   },
 
   render: (args) => (
-    <div
-      style={{
-        width: sizes.xl.width,
-      }}
-    >
-      <Rating {...args} />
+    <div className="flex gap-4">
+      <div
+        style={{
+          width: sizes.xl.width,
+        }}
+      >
+        <Rating {...args} />
+      </div>
+      <div
+        style={{
+          width: sizes.xl.width,
+        }}
+      >
+        <RatingSkeleton />
+      </div>
     </div>
   ),
 };

@@ -5,7 +5,7 @@ import {
   MediaStatus,
 } from "@/app/gql/sdk";
 
-import InfoPanel, { type Anime } from "@/app/ui/info-panel";
+import InfoPanel, { InfoPanelSkeleton, type Anime } from "@/app/ui/info-panel";
 
 import { sizes } from "@/app/ui/utils";
 
@@ -20,16 +20,25 @@ type Story = StoryObj<typeof meta>;
 
 export default meta;
 
-export const Default: Story = {
+export const DefaultWithSkeleton: Story = {
   args: {},
 
   render: (args) => (
-    <div
-      style={{
-        width: sizes.xl.width,
-      }}
-    >
-      <InfoPanel {...args} />
+    <div className="flex gap-2">
+      <div
+        style={{
+          width: sizes.xl.width,
+        }}
+      >
+        <InfoPanel {...args} />
+      </div>
+      <div
+        style={{
+          width: sizes.xl.width,
+        }}
+      >
+        <InfoPanelSkeleton />
+      </div>
     </div>
   ),
 };
@@ -139,17 +148,26 @@ const frieren = {
   ],
 } satisfies Anime;
 
-export const Frieren: Story = {
+export const FrierenWithSkeleton: Story = {
   args: {
     anime: frieren,
   },
   render: (args) => (
-    <div
-      style={{
-        width: sizes.xl.width,
-      }}
-    >
-      <InfoPanel {...args} />
+    <div className="flex gap-2">
+      <div
+        style={{
+          width: sizes.xl.width,
+        }}
+      >
+        <InfoPanel {...args} />
+      </div>
+      <div
+        style={{
+          width: sizes.xl.width,
+        }}
+      >
+        <InfoPanelSkeleton />
+      </div>
     </div>
   ),
 };
@@ -243,17 +261,26 @@ const gupMovie = {
   synonyms: [],
 } satisfies Anime;
 
-export const GirlsUndPanzerMovie: Story = {
+export const GirlsUndPanzerMovieWithSkeleton: Story = {
   args: {
     anime: gupMovie,
   },
   render: (args) => (
-    <div
-      style={{
-        width: sizes.xl.width,
-      }}
-    >
-      <InfoPanel {...args} />
+    <div className="flex gap-2">
+      <div
+        style={{
+          width: sizes.xl.width,
+        }}
+      >
+        <InfoPanel {...args} />
+      </div>
+      <div
+        style={{
+          width: sizes.xl.width,
+        }}
+      >
+        <InfoPanelSkeleton />
+      </div>
     </div>
   ),
 };
@@ -347,17 +374,26 @@ const priparis = {
   synonyms: [],
 } satisfies Anime;
 
-export const PriparaMovie: Story = {
+export const PriparaMovieWithSkeleton: Story = {
   args: {
     anime: priparis,
   },
   render: (args) => (
-    <div
-      style={{
-        width: sizes.xl.width,
-      }}
-    >
-      <InfoPanel {...args} />
+    <div className="flex gap-2">
+      <div
+        style={{
+          width: sizes.xl.width,
+        }}
+      >
+        <InfoPanel {...args} />
+      </div>
+      <div
+        style={{
+          width: sizes.xl.width,
+        }}
+      >
+        <InfoPanelSkeleton />
+      </div>
     </div>
   ),
 };
@@ -472,17 +508,26 @@ const kusuriya = {
 } satisfies Anime;
 
 // edge case, OLM is both main and non-main studio
-export const KusuriyaNoHitorigoto2ndSeason: Story = {
+export const KusuriyaNoHitorigoto2ndSeasonWithSkeleton: Story = {
   args: {
     anime: kusuriya,
   },
   render: (args) => (
-    <div
-      style={{
-        width: sizes.xl.width,
-      }}
-    >
-      <InfoPanel {...args} />
+    <div className="flex gap-2">
+      <div
+        style={{
+          width: sizes.xl.width,
+        }}
+      >
+        <InfoPanel {...args} />
+      </div>
+      <div
+        style={{
+          width: sizes.xl.width,
+        }}
+      >
+        <InfoPanelSkeleton />
+      </div>
     </div>
   ),
 };

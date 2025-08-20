@@ -1,3 +1,5 @@
+import Skeleton from "@/app/ui/skeleton";
+
 import { FaStar } from "react-icons/fa";
 
 type Props = {
@@ -20,5 +22,14 @@ const Rating = ({ rank, context }: Props) => {
     </p>
   );
 };
+
+export const RatingSkeleton = () => (
+  <Skeleton className="relative flex size-auto items-center justify-center rounded-[3px] p-2">
+    <FaStar className="absolute top-[calc(50%-1px)] left-3 size-3 -translate-y-1/2" />
+    <span className="text-xs leading-[0.8625rem] font-medium capitalize">
+      #1 some random rank
+    </span>
+  </Skeleton>
+);
 
 export default Rating;

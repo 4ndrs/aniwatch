@@ -1,9 +1,10 @@
 import Image from "next/image";
-import Cover from "@/app/ui/cover";
-import Rating from "@/app/ui/rating";
-import InfoPanel from "@/app/ui/info-panel";
-import Description from "@/app/ui/description";
+import Skeleton from "@/app/ui/skeleton";
 import ExternalLinks from "@/app/ui/external-links";
+import Cover, { CoverSkeleton } from "@/app/ui/cover";
+import Rating, { RatingSkeleton } from "@/app/ui/rating";
+import InfoPanel, { InfoPanelSkeleton } from "@/app/ui/info-panel";
+import Description, { DescriptionSkeleton } from "@/app/ui/description";
 
 import { sizes } from "@/app/ui/utils";
 import { Suspense } from "react";
@@ -58,7 +59,7 @@ export const generateMetadata = async ({
 const AnimeLayout = ({ children, params }: Props) => (
   <main>
     <div className="relative h-86 w-full bg-gray-700 brightness-80">
-      <Suspense fallback={<div>Loading banner...</div>}>
+      <Suspense fallback={<Skeleton className="size-full" />}>
         <BannerImage params={params} />
       </Suspense>
     </div>
@@ -70,14 +71,16 @@ const AnimeLayout = ({ children, params }: Props) => (
           className="relative flex-shrink-0"
         >
           <div className="absolute -top-34 left-0">
-            <Suspense fallback={<div>Loading...</div>}>
+            <Suspense
+              fallback={<CoverSkeleton size="xl" className="rounded-xs" />}
+            >
               <MainImage params={params} />
             </Suspense>
           </div>
         </div>
 
-        <div className="max-w-[56.25rem]">
-          <Suspense fallback={<div>Loading info...</div>}>
+        <div className="max-w-[56.25rem] flex-1">
+          <Suspense fallback={<DescriptionSkeleton />}>
             <MainInfo params={params} />
           </Suspense>
         </div>
@@ -89,11 +92,11 @@ const AnimeLayout = ({ children, params }: Props) => (
         style={{ width: sizes.xl.width }}
         className="flex flex-shrink-0 flex-col gap-4"
       >
-        <Suspense fallback={<div>Loading rankings...</div>}>
+        <Suspense fallback={<RatingSkeleton />}>
           <Rankings params={params} />
         </Suspense>
 
-        <Suspense fallback={<div>Loading info...</div>}>
+        <Suspense fallback={<InfoPanelSkeleton />}>
           <SideInfoPanel params={params} />
         </Suspense>
 
