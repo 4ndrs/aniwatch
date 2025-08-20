@@ -1,0 +1,1 @@
+var O=(function(n){return n.Background="BACKGROUND",n.Main="MAIN",n.Supporting="SUPPORTING",n})({}),S=(function(n){return n.Manga="MANGA",n.Movie="MOVIE",n.Music="MUSIC",n.Novel="NOVEL",n.Ona="ONA",n.OneShot="ONE_SHOT",n.Ova="OVA",n.Special="SPECIAL",n.Tv="TV",n.TvShort="TV_SHORT",n})({});export{O as C,S as M};
