@@ -78,21 +78,35 @@ export const ExternalLinksSkeleton = () => (
     </h2>
 
     <ul className="flex flex-col gap-2.5">
-      {Array.from({ length: 5 }).map((_, index) => (
-        <li key={index}>
-          <Skeleton className="flex size-auto items-center gap-3 rounded-[5px] p-1">
-            {/* <NoIcon /> sizes */}
-            <div className="rounded-[3px] p-[0.3125rem]">
-              <FaLink className="size-3.5" />
-            </div>
-
-            <span className="font-(family-name:--font-overpass) text-[0.8125rem] leading-[0.8125rem] font-bold">
-              Some Site
-            </span>
-          </Skeleton>
-        </li>
-      ))}
+      <li>
+        <SkeletonContent>Official Site</SkeletonContent>
+      </li>
+      <li>
+        <SkeletonContent>YouTube</SkeletonContent>
+      </li>
+      <li>
+        <SkeletonContent>Crunchyroll</SkeletonContent>
+      </li>
+      <li>
+        <SkeletonContent>Netflix</SkeletonContent>
+      </li>
+      <li>
+        <SkeletonContent>Twitter</SkeletonContent>
+      </li>
     </ul>
+  </div>
+);
+
+const SkeletonContent = ({ children }: { children: React.ReactNode }) => (
+  <div className="bg-foreground-sp group flex items-center gap-3 rounded-[5px] p-1 transition-colors data-[highlight]:hover:bg-[var(--link-color)]/88">
+    {/* <NoIcon /> sizes */}
+    <Skeleton className="rounded-[3px] p-[0.3125rem]">
+      <FaLink className="size-3.5" />
+    </Skeleton>
+
+    <Skeleton className="font-(family-name:--font-overpass) text-[0.8125rem] leading-[0.8125rem] font-bold">
+      {children}
+    </Skeleton>
   </div>
 );
 
