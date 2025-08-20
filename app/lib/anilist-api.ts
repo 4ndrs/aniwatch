@@ -37,6 +37,7 @@ export const anilistApi = createApi({
   baseQuery,
   endpoints: (build) => ({
     getTopAnime: build.infiniteQuery<TopAnimeQuery, void, InitialPageParam>({
+      keepUnusedDataFor: 60 * 60 * 60, // don't refresh often, messes up scroll when doing infinite scrolling
       infiniteQueryOptions: {
         initialPageParam: {
           page: 1,
