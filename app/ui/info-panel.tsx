@@ -1,8 +1,9 @@
+import Skeleton from "@/app/ui/skeleton";
+
 import { MediaFormat } from "@/app/gql/graphql";
 import { MediaFormatDisplayMap, MediaStatusDisplayMap } from "@/app/ui/utils";
 
 import type { AnimeQuery } from "@/app/gql/sdk";
-import Skeleton from "./skeleton";
 
 export type Anime = Pick<
   NonNullable<AnimeQuery["Media"]>,

@@ -4,8 +4,8 @@ import { loadAnime } from "@/app/lib/server-fetchers";
 import AnimeCard from "@/app/ui/anime-card";
 import StaffCard from "@/app/ui/staff-card";
 import ReviewCard from "@/app/ui/review-card";
-import RelationCard from "@/app/ui/relation-card";
-import CharacterCard from "@/app/ui/character-card";
+import RelationCard, { RelationCardSkeleton } from "@/app/ui/relation-card";
+import CharacterCard, { CharacterCardSkeleton } from "@/app/ui/character-card";
 
 type Props = {
   params: Promise<{
@@ -15,11 +15,35 @@ type Props = {
 
 const Overview = ({ params }: Props) => (
   <div className="space-y-7.5">
-    <Suspense fallback={<div>Loading relations...</div>}>
+    <Suspense
+      fallback={
+        <section className="space-y-2.5">
+          <h2 className="text-sm leading-4 font-medium">Relations</h2>
+
+          <div className="flex flex-wrap gap-5">
+            {Array.from({ length: 4 }).map((_, index) => (
+              <RelationCardSkeleton key={index} />
+            ))}
+          </div>
+        </section>
+      }
+    >
       <Relations params={params} />
     </Suspense>
 
-    <Suspense fallback={<div>Loading characters...</div>}>
+    <Suspense
+      fallback={
+        <section className="space-y-2.5">
+          <h2 className="text-sm leading-4 font-medium">Characters</h2>
+
+          <div className="grid gap-x-[1.875rem] gap-y-[0.9375rem] lg:grid-cols-2 xl:grid-cols-3">
+            {Array.from({ length: 6 }).map((_, index) => (
+              <CharacterCardSkeleton key={index} />
+            ))}
+          </div>
+        </section>
+      }
+    >
       <Characters params={params} />
     </Suspense>
 

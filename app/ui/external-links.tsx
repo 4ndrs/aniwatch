@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Skeleton from "@/app/ui/skeleton";
 
 import { FaLink } from "react-icons/fa";
 
@@ -67,6 +68,31 @@ const ExternalLinks = ({ links }: Props) => {
 const NoIcon = () => (
   <div className="rounded-[3px] bg-[rgb(12,101,166)] p-[0.3125rem]">
     <FaLink className="size-3.5 text-white" />
+  </div>
+);
+
+export const ExternalLinksSkeleton = () => (
+  <div aria-hidden>
+    <h2 className="text-text mb-2.5 text-sm leading-4 font-medium">
+      External & Streaming Links
+    </h2>
+
+    <ul className="flex flex-col gap-2.5">
+      {Array.from({ length: 5 }).map((_, index) => (
+        <li key={index}>
+          <Skeleton className="flex size-auto items-center gap-3 rounded-[5px] p-1">
+            {/* <NoIcon /> sizes */}
+            <div className="rounded-[3px] p-[0.3125rem]">
+              <FaLink className="size-3.5" />
+            </div>
+
+            <span className="font-(family-name:--font-overpass) text-[0.8125rem] leading-[0.8125rem] font-bold">
+              Some Site
+            </span>
+          </Skeleton>
+        </li>
+      ))}
+    </ul>
   </div>
 );
 

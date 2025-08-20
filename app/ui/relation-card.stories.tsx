@@ -1,4 +1,7 @@
-import RelationCard, { type Relation } from "@/app/ui/relation-card";
+import RelationCard, {
+  type Relation,
+  RelationCardSkeleton,
+} from "@/app/ui/relation-card";
 
 import { MediaFormat, MediaStatus, MediaRelation } from "@/app/gql/sdk";
 
@@ -13,8 +16,14 @@ type Story = StoryObj<typeof meta>;
 
 export default meta;
 
-export const Default: Story = {
+export const DefaultWithSkeleton: Story = {
   args: {},
+  render: (args) => (
+    <div className="flex gap-4">
+      <RelationCard {...args} />
+      <RelationCardSkeleton />
+    </div>
+  ),
 };
 
 const sourceRelation = {
@@ -32,10 +41,16 @@ const sourceRelation = {
   },
 } satisfies Relation;
 
-export const SourceRelation: Story = {
+export const SourceRelationWithSkeleton: Story = {
   args: {
     relation: sourceRelation,
   },
+  render: (args) => (
+    <div className="flex gap-4">
+      <RelationCard {...args} />
+      <RelationCardSkeleton />
+    </div>
+  ),
 };
 
 const sideStoryRelation = {
@@ -53,8 +68,14 @@ const sideStoryRelation = {
   },
 } satisfies Relation;
 
-export const SideStoryRelation: Story = {
+export const SideStoryRelationWithSkeleton: Story = {
   args: {
     relation: sideStoryRelation,
   },
+  render: (args) => (
+    <div className="flex gap-4">
+      <RelationCard {...args} />
+      <RelationCardSkeleton />
+    </div>
+  ),
 };

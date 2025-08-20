@@ -1,6 +1,6 @@
-import CharacterCard from "@/app/ui/character-card";
-
 import { CharacterRole } from "@/app/gql/graphql";
+
+import CharacterCard, { CharacterCardSkeleton } from "@/app/ui/character-card";
 
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 
@@ -15,6 +15,16 @@ export default meta;
 
 export const Default: Story = {
   args: {},
+  render: (args) => (
+    <div className="flex gap-2">
+      <div className="w-[337.33px]">
+        <CharacterCard {...args} />
+      </div>
+      <div className="w-[337.33px]">
+        <CharacterCardSkeleton />
+      </div>
+    </div>
+  ),
 };
 
 export const Frieren: Story = {
@@ -42,8 +52,13 @@ export const Frieren: Story = {
     },
   },
   render: (args) => (
-    <div className="w-[337.33px]">
-      <CharacterCard {...args} />
+    <div className="flex gap-2">
+      <div className="w-[337.33px]">
+        <CharacterCard {...args} />
+      </div>
+      <div className="w-[337.33px]">
+        <CharacterCardSkeleton />
+      </div>
     </div>
   ),
 };
@@ -73,8 +88,13 @@ export const Fern: Story = {
     },
   },
   render: (args) => (
-    <div className="w-[337.33px]">
-      <CharacterCard {...args} />
+    <div className="flex gap-2">
+      <div className="w-[337.33px]">
+        <CharacterCard {...args} />
+      </div>
+      <div className="w-[337.33px]">
+        <CharacterCardSkeleton />
+      </div>
     </div>
   ),
 };

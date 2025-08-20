@@ -1,10 +1,10 @@
 import Image from "next/image";
 import Skeleton from "@/app/ui/skeleton";
-import ExternalLinks from "@/app/ui/external-links";
 import Cover, { CoverSkeleton } from "@/app/ui/cover";
 import Rating, { RatingSkeleton } from "@/app/ui/rating";
 import InfoPanel, { InfoPanelSkeleton } from "@/app/ui/info-panel";
 import Description, { DescriptionSkeleton } from "@/app/ui/description";
+import ExternalLinks, { ExternalLinksSkeleton } from "@/app/ui/external-links";
 
 import { sizes } from "@/app/ui/utils";
 import { Suspense } from "react";
@@ -100,7 +100,7 @@ const AnimeLayout = ({ children, params }: Props) => (
           <SideInfoPanel params={params} />
         </Suspense>
 
-        <Suspense fallback={<div>Loading external links...</div>}>
+        <Suspense fallback={<ExternalLinksSkeleton />}>
           <ExLinks params={params} />
         </Suspense>
       </div>

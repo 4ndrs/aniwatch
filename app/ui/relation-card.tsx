@@ -1,4 +1,4 @@
-import Cover from "@/app/ui/cover";
+import Cover, { CoverSkeleton } from "@/app/ui/cover";
 
 import { type AnimeQuery, MediaRelation } from "@/app/gql/sdk";
 import { MediaFormatDisplayMap, MediaStatusDisplayMap } from "@/app/ui/utils";
@@ -69,6 +69,10 @@ const RelationCard = ({ relation }: Props) => {
     </article>
   );
 };
+
+export const RelationCardSkeleton = () => (
+  <CoverSkeleton size="md" className="rounded-[3px]" />
+);
 
 // in the query (@/app/queries/anime.graphql) version 2 is being
 // requested via parameters so that we have the source definition

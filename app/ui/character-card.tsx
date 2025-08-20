@@ -1,4 +1,5 @@
-import Cover from "@/app/ui/cover";
+import Skeleton from "@/app/ui/skeleton";
+import Cover, { CoverSkeleton } from "@/app/ui/cover";
 
 import type { AnimeQuery, CharacterRole } from "@/app/gql/sdk";
 
@@ -102,5 +103,38 @@ const CharacterCard = ({ role, character, voiceActor }: Props) => {
     </article>
   );
 };
+
+export const CharacterCardSkeleton = () => (
+  <div
+    aria-hidden
+    className="bg-foreground-sp flex justify-between overflow-hidden rounded-[3px]"
+  >
+    <div className="flex">
+      <CoverSkeleton size="sm" />
+
+      <div className="flex flex-col justify-between p-2.5">
+        <Skeleton className="text-xs leading-[0.975rem]">Frieren</Skeleton>
+
+        <Skeleton className="text-[0.6875rem] leading-[0.790625rem] capitalize">
+          Main
+        </Skeleton>
+      </div>
+    </div>
+
+    <div className="flex">
+      <div className="flex flex-col items-end justify-between p-2.5">
+        <Skeleton className="text-xs leading-[0.975rem]">
+          Tenezaki Atsumi
+        </Skeleton>
+
+        <Skeleton className="text-[0.6875rem] leading-[0.790625rem] capitalize">
+          Japanese
+        </Skeleton>
+      </div>
+
+      <CoverSkeleton size="sm" />
+    </div>
+  </div>
+);
 
 export default CharacterCard;

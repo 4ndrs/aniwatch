@@ -1,4 +1,7 @@
-import ExternalLinks, { type Links } from "@/app/ui/external-links";
+import ExternalLinks, {
+  type Links,
+  ExternalLinksSkeleton,
+} from "@/app/ui/external-links";
 
 import { sizes } from "@/app/ui/utils";
 
@@ -17,12 +20,21 @@ export const Default: Story = {
   args: {},
 
   render: (args) => (
-    <div
-      style={{
-        width: sizes.xl.width,
-      }}
-    >
-      <ExternalLinks {...args} />
+    <div className="flex gap-2">
+      <div
+        style={{
+          width: sizes.xl.width,
+        }}
+      >
+        <ExternalLinks {...args} />
+      </div>
+      <div
+        style={{
+          width: sizes.xl.width,
+        }}
+      >
+        <ExternalLinksSkeleton />
+      </div>
     </div>
   ),
 };
@@ -76,12 +88,21 @@ export const Kusuriya: Story = {
   },
 
   render: (args) => (
-    <div
-      style={{
-        width: sizes.xl.width,
-      }}
-    >
-      <ExternalLinks {...args} />
+    <div className="flex gap-2">
+      <div
+        style={{
+          width: sizes.xl.width,
+        }}
+      >
+        <ExternalLinks {...args} />
+      </div>
+      <div
+        style={{
+          width: sizes.xl.width,
+        }}
+      >
+        <ExternalLinksSkeleton />
+      </div>
     </div>
   ),
 };
