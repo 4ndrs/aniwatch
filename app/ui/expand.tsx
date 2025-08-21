@@ -13,8 +13,8 @@ const Expand = ({ children, className }: Props) => {
 
   return (
     <div
-      className={twMerge("group relative", className)}
       data-expand={expand || undefined}
+      className={twMerge("group relative", className)}
     >
       <p
         ref={(ref) => {
