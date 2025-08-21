@@ -62,7 +62,7 @@ const AnimeLayout = ({ children, params }: Props) => (
       </Suspense>
     </div>
 
-    <div className="bg-foreground-sp mb-[1.875rem] min-h-[13rem]">
+    <div className="bg-foreground-sp mb-[1.875rem] min-h-[13.9275rem]">
       <div className="mx-auto flex max-w-[71.25rem] gap-[1.875rem] px-4 py-[1.5625rem] 2xl:max-w-[85rem]">
         <div
           style={{ width: sizes.xl.width }}

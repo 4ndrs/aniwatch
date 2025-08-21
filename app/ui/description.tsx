@@ -1,4 +1,5 @@
 import parse from "html-react-parser";
+import Expand from "@/app/ui/expand";
 import Skeleton from "@/app/ui/skeleton";
 
 type Props = {
@@ -11,9 +12,10 @@ const Description = ({ title, description }: Props) => (
     <h1 className="text-text text-[1.1875rem] leading-[1.365625rem]">
       {title ?? "No title"}
     </h1>
-    <p className="text-text-light hover:text-text py-[0.9375rem] text-sm leading-[1.3125rem] transition-colors duration-200">
+
+    <Expand className="py-[0.9375rem]">
       {parse(description ?? "No description available")}
-    </p>
+    </Expand>
   </div>
 );
 
@@ -24,11 +26,12 @@ export const DescriptionSkeleton = () => (
     </Skeleton>
 
     <div className="flex flex-col gap-1 py-[0.9375rem] text-sm leading-[1.3125rem]">
-      <Skeleton className="w-full">Description</Skeleton>
-      <Skeleton className="w-full">Description</Skeleton>
-      <Skeleton className="w-full">Description</Skeleton>
-      <Skeleton className="w-full">Description</Skeleton>
-      <Skeleton>Description</Skeleton>
+      {Array.from({ length: 4 }).map((_, index) => (
+        <Skeleton key={index} className="w-full">
+          Description
+        </Skeleton>
+      ))}
+      <Skeleton>Some random description line here</Skeleton>
     </div>
   </div>
 );
