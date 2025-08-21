@@ -1,4 +1,4 @@
-import{B as t}from"./Button-BIb-5Lt-.js";import"./iframe-CL4vWSkc.js";import"./preload-helper-D9Z9MdNV.js";const{fn:n}=__STORYBOOK_MODULE_TEST__,p={title:"Example/Button",component:t,parameters:{layout:"centered"},tags:["autodocs"],argTypes:{backgroundColor:{control:"color"}},args:{onClick:n()}},r={args:{primary:!0,label:"Button"}},a={args:{label:"Button"}},e={args:{size:"large",label:"Button"}},s={args:{size:"small",label:"Button"}},o={args:{primary:!1,label:"Button"}};r.parameters={...r.parameters,docs:{...r.parameters?.docs,source:{originalSource:`{
+import{B as t}from"./Button-CxlFIlLK.js";import"./iframe-BKv4NkpT.js";import"./preload-helper-D9Z9MdNV.js";const{fn:n}=__STORYBOOK_MODULE_TEST__,p={title:"Example/Button",component:t,parameters:{layout:"centered"},tags:["autodocs"],argTypes:{backgroundColor:{control:"color"}},args:{onClick:n()}},r={args:{primary:!0,label:"Button"}},a={args:{label:"Button"}},e={args:{size:"large",label:"Button"}},s={args:{size:"small",label:"Button"}},o={args:{primary:!1,label:"Button"}};r.parameters={...r.parameters,docs:{...r.parameters?.docs,source:{originalSource:`{
   args: {
     primary: true,
     label: 'Button'
