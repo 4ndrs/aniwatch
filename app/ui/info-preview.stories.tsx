@@ -674,3 +674,22 @@ export const Roselia: Story = {
     </div>
   ),
 };
+
+// right collision logic
+export const FrierenRightCollision: Story = {
+  args: { anime: frieren },
+  render: (args) => (
+    <div className="flex justify-end gap-2">
+      <InfoPreview
+        {...args}
+        aria-labelledby={slugify(frieren.title.romaji) + "-card"}
+      >
+        <AnimeCard
+          title={frieren.title.romaji}
+          titleId={slugify(frieren.title.romaji) + "-card"}
+          imageUrl={frieren.coverImage.large}
+        />
+      </InfoPreview>
+    </div>
+  ),
+};
