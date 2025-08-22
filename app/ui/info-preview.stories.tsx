@@ -518,3 +518,159 @@ export const Garupan: Story = {
     </div>
   ),
 };
+
+// 2023 - [Object Object] lmao
+const tian = {
+  id: 127976,
+  title: {
+    romaji: "Tian Guan Ci Fu 2",
+  },
+  coverImage: {
+    color: "#930d35",
+    large:
+      "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx127976-zmag82H3ygcI.jpg",
+  },
+  startDate: {
+    year: 2023,
+  },
+  endDate: {
+    year: 2024,
+  },
+  format: MediaFormat.Ona,
+  genres: ["Adventure", "Drama", "Fantasy", "Romance"],
+  season: null,
+  episodes: 12,
+  duration: 24,
+  seasonYear: null,
+  averageScore: 85,
+  studios: {
+    edges: [
+      {
+        isMain: false,
+        node: {
+          id: 6389,
+          name: "bilibili",
+        },
+      },
+      {
+        isMain: true,
+        node: {
+          id: 7050,
+          name: "Red Dog Culture House",
+        },
+      },
+    ],
+  },
+} satisfies Anime;
+
+export const Tian: Story = {
+  args: { anime: tian },
+  render: (args) => (
+    <div className="flex gap-2">
+      <div className="w-[381px]">
+        <InfoPreview
+          {...args}
+          aria-labelledby={slugify(tian.title.romaji) + "-card"}
+        >
+          <AnimeCard
+            title={tian.title.romaji}
+            titleId={slugify(tian.title.romaji) + "-card"}
+            imageUrl={tian.coverImage.large}
+          />
+        </InfoPreview>
+      </div>
+    </div>
+  ),
+};
+
+// mid smiley
+const roselia = {
+  id: 117764,
+  title: {
+    romaji: "BanG Dream! Episode of Roselia II: Song I am.",
+  },
+  coverImage: {
+    color: "#436be4",
+    large:
+      "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx117764-oRXvH4cc5Ux2.jpg",
+  },
+  startDate: {
+    year: 2021,
+  },
+  endDate: {
+    year: 2021,
+  },
+  format: MediaFormat.Movie,
+  genres: ["Music"],
+  season: MediaSeason.Summer,
+  episodes: 1,
+  duration: 71,
+  seasonYear: 2021,
+  averageScore: 79,
+  studios: {
+    edges: [
+      {
+        isMain: true,
+        node: {
+          id: 537,
+          name: "SANZIGEN",
+        },
+      },
+      {
+        isMain: false,
+        node: {
+          id: 6259,
+          name: "TOKYO MX",
+        },
+      },
+      {
+        isMain: false,
+        node: {
+          id: 6339,
+          name: "Good Smile Company",
+        },
+      },
+      {
+        isMain: false,
+        node: {
+          id: 775,
+          name: "Bushiroad",
+        },
+      },
+      {
+        isMain: false,
+        node: {
+          id: 134,
+          name: "Horipro",
+        },
+      },
+      {
+        isMain: false,
+        node: {
+          id: 539,
+          name: "Ultra Super Pictures",
+        },
+      },
+    ],
+  },
+} satisfies Anime;
+
+export const Roselia: Story = {
+  args: { anime: roselia },
+  render: (args) => (
+    <div className="flex gap-2">
+      <div className="w-[381px]">
+        <InfoPreview
+          {...args}
+          aria-labelledby={slugify(roselia.title.romaji) + "-card"}
+        >
+          <AnimeCard
+            title={roselia.title.romaji}
+            titleId={slugify(roselia.title.romaji) + "-card"}
+            imageUrl={roselia.coverImage.large}
+          />
+        </InfoPreview>
+      </div>
+    </div>
+  ),
+};

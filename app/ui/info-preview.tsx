@@ -48,7 +48,7 @@ const InfoPreview = ({ anime, children, ...rest }: Props) => {
       : anime?.startDate?.year &&
           anime.endDate?.year &&
           anime.startDate.year !== anime.endDate?.year
-        ? anime.startDate.year + " - " + anime.endDate
+        ? anime.startDate.year + " - " + anime.endDate.year
         : anime?.startDate?.year;
 
   const format = anime?.format && FormatDisplayMap[anime.format];
