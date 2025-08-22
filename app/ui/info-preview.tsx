@@ -1,20 +1,25 @@
-import Color from "color";
-
 import {
   PiSmileyBold,
+  PiSmileySadBold,
   PiSmileyMehBold,
   PiSmileyBlankBold,
 } from "react-icons/pi";
 
-import { TopAnimeQuery } from "@/app/gql/sdk";
+import Color from "color";
+
+import { MediaFormat, TopAnimeQuery } from "@/app/gql/sdk";
+import { formatDuration, MediaFormatDisplayMap } from "@/app/ui/utils";
 
 type Anime = Pick<
   NonNullable<NonNullable<NonNullable<TopAnimeQuery["Page"]>["media"]>[number]>,
   | "format"
   | "genres"
   | "season"
+  | "endDate"
   | "studios"
+  | "duration"
   | "episodes"
+  | "startDate"
   | "seasonYear"
   | "coverImage"
   | "averageScore"
@@ -30,60 +35,98 @@ type Props = {
   "aria-labelledby"?: string;
 };
 
-const InfoPreview = ({ anime, children, ...rest }: Props) => (
-  <div role="tooltip" className="group relative size-fit">
-    {children}
+const FormatDisplayMap = {
+  ...MediaFormatDisplayMap,
+  // changes on this component
+  [MediaFormat.Tv]: "TV Show",
+};
 
+const InfoPreview = ({ anime, children, ...rest }: Props) => {
+  const season =
+    anime?.season && anime.seasonYear
+      ? anime.season.toLowerCase() + " " + anime.seasonYear
+      : anime?.startDate?.year &&
+          anime.endDate?.year &&
+          anime.startDate.year !== anime.endDate?.year
+        ? anime.startDate.year + " - " + anime.endDate
+        : anime?.startDate?.year;
+
+  const format = anime?.format && FormatDisplayMap[anime.format];
+
+  const duration =
+    anime?.format &&
+    anime.format === MediaFormat.Movie &&
+    anime.duration != null
+      ? formatDuration(anime.duration)
+      : anime?.format &&
+          anime.format !== MediaFormat.Movie &&
+          anime.episodes != null
+        ? anime.episodes + " episode" + (anime.episodes === 1 ? "" : "s")
+        : undefined;
+
+  return (
     <div
+      role="tooltip"
+      className="group relative size-fit"
       style={{
         ...(generateColors(anime?.coverImage?.color) as React.CSSProperties),
       }}
-      aria-labelledby={rest["aria-labelledby"]}
-      className="bg-foreground-sp pointer-events-none absolute top-[3%] right-0 z-[1] flex w-[18.125rem] translate-x-[calc(100%+1rem)] scale-92 flex-col gap-[1.375rem] rounded-md p-6 font-(family-name:--font-overpass) leading-[1.125rem] text-white opacity-0 transition-transform duration-220 group-hover:scale-100 group-hover:opacity-100 after:absolute after:top-3 after:left-[-0.5625rem] after:size-2.5 after:[border-width:6px_9px_6px_0] after:[border-style:solid] after:[border-color:transparent_var(--color-foreground-sp)_transparent_transparent] after:content-['']"
     >
-      <div className="text-gray-x800 flex justify-between font-semibold capitalize">
-        <span aria-label="Season">
-          {anime?.season?.toLowerCase()} {anime?.seasonYear}
-        </span>
+      {children}
 
-        {anime?.averageScore && (
-          <span aria-label="Average Score" className="flex items-center gap-1">
-            {getSmiley(anime.averageScore)}
-            {anime.averageScore}%
+      <div
+        aria-labelledby={rest["aria-labelledby"]}
+        className="bg-foreground-sp pointer-events-none absolute top-[3%] right-0 z-[1] flex min-w-[18.125rem] translate-x-[calc(100%+1rem)] scale-92 flex-col gap-[1.375rem] rounded-md p-6 font-(family-name:--font-overpass) leading-[1.125rem] text-white opacity-0 transition-transform duration-220 group-hover:scale-100 group-hover:opacity-100 after:absolute after:top-3 after:left-[-0.5625rem] after:size-2.5 after:[border-width:6px_9px_6px_0] after:[border-style:solid] after:[border-color:transparent_var(--color-foreground-sp)_transparent_transparent] after:content-['']"
+      >
+        <div className="text-gray-x800 flex items-center justify-between font-semibold capitalize">
+          <span aria-label="Season">{season}</span>
+
+          {anime?.averageScore && (
+            <span
+              aria-label="Average Score"
+              className="flex items-center gap-1"
+            >
+              {getSmiley(anime.averageScore)}
+              {anime.averageScore}%
+            </span>
+          )}
+        </div>
+
+        <div className="flex flex-col gap-1 text-[0.8125rem] leading-[0.934375rem]">
+          <span aria-label="Studios" className="font-bold text-(--media-text)">
+            {anime?.studios?.edges
+              ?.filter((studio) => !!studio?.isMain && !!studio.node?.name)
+              ?.map((studio) => studio?.node?.name)
+              .join(", ")}
           </span>
-        )}
-      </div>
-
-      <div className="flex flex-col gap-1 text-[0.8125rem] leading-[0.934375rem]">
-        <span aria-label="Studios" className="font-bold text-(--media-text)">
-          {anime?.studios?.edges
-            ?.filter((studio) => !!studio?.isMain && !!studio.node?.name)
-            ?.map((studio) => studio?.node?.name)
-            .join(", ")}
-        </span>
-        <span className="text-foreground font-semibold">
-          <span aria-label="Format">{anime?.format}</span> •{" "}
-          <span aria-label="Episodes">{anime?.episodes} episodes</span>
-        </span>
-      </div>
-
-      <ul aria-label="Genres" className="flex flex-wrap gap-3 text-xs">
-        {anime?.genres?.slice(0, 3).map((genre) => (
-          <li
-            key={genre}
-            className="rounded-[0.625rem] bg-(--media-background) px-3 leading-5 font-bold text-nowrap text-(--media-background-text) lowercase"
+          <span
+            aria-label="Format and Duration"
+            className="text-foreground font-semibold"
           >
-            {genre}
-          </li>
-        ))}
-      </ul>
+            {format}
+            {format && duration ? <span className="px-2">•</span> : undefined}
+            {duration}
+          </span>
+        </div>
+
+        <ul aria-label="Genres" className="flex gap-3 text-xs">
+          {anime?.genres?.slice(0, 3).map((genre) => (
+            <li
+              key={genre}
+              className="rounded-[0.625rem] bg-(--media-background) px-3 leading-5 font-bold text-nowrap text-(--media-background-text) lowercase"
+            >
+              {genre}
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 const generateColors = (hex?: string | null) => {
   if (!hex) {
-    return;
+    hex = "#8ba0b2";
   }
 
   const base = Color(hex).hsl();
@@ -99,11 +142,11 @@ const generateColors = (hex?: string | null) => {
   };
 };
 
-const className = "size-[1.1875rem]";
-
 const getSmiley = (score: number) => {
+  const className = "size-[1.1875rem]";
+
   if (score < 60) {
-    return <PiSmileyBold className={className + " text-red"} />;
+    return <PiSmileySadBold className={className + " text-red"} />;
   }
 
   if (score < 80) {

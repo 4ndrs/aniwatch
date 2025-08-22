@@ -12,6 +12,13 @@ query TopAnime($page: Int!, $perPage: Int!) {
         color
         large
       }
+      startDate {
+        year
+      }
+      endDate {
+        year
+      }
+      duration
       format
       genres
       season

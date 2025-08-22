@@ -1,7 +1,12 @@
+import {
+  formatDuration,
+  MediaFormatDisplayMap,
+  MediaStatusDisplayMap,
+} from "@/app/ui/utils";
+
 import Skeleton from "@/app/ui/skeleton";
 
 import { MediaFormat } from "@/app/gql/graphql";
-import { MediaFormatDisplayMap, MediaStatusDisplayMap } from "@/app/ui/utils";
 
 import type { AnimeQuery } from "@/app/gql/sdk";
 
@@ -285,20 +290,6 @@ const InfoPanel = ({ anime }: Props) => {
       </dl>
     </aside>
   );
-};
-
-const formatDuration = (minutes: number) => {
-  const mins = minutes % 60;
-  const hours = Math.floor(minutes / 60);
-
-  const minsStr = mins > 0 ? mins + " min" + (mins > 1 ? "s" : "") : "";
-
-  const hoursStr =
-    hours > 0
-      ? hours + " hour" + (hours > 1 ? "s" : "") + (mins > 0 ? ", " : "")
-      : "";
-
-  return hoursStr + minsStr;
 };
 
 const formatDate = (date: { day: number; month: number; year: number }) => {

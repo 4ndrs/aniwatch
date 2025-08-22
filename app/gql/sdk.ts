@@ -4686,7 +4686,7 @@ export type TopAnimeQueryVariables = Exact<{
 }>;
 
 
-export type TopAnimeQuery = { __typename?: 'Query', Page?: { __typename?: 'Page', pageInfo?: { __typename?: 'PageInfo', hasNextPage?: boolean | null } | null, media?: Array<{ __typename?: 'Media', id: number, format?: MediaFormat | null, genres?: Array<string | null> | null, season?: MediaSeason | null, episodes?: number | null, seasonYear?: number | null, averageScore?: number | null, title?: { __typename?: 'MediaTitle', romaji?: string | null } | null, coverImage?: { __typename?: 'MediaCoverImage', color?: string | null, large?: string | null } | null, studios?: { __typename?: 'StudioConnection', edges?: Array<{ __typename?: 'StudioEdge', isMain: boolean, node?: { __typename?: 'Studio', id: number, name: string } | null } | null> | null } | null } | null> | null } | null };
+export type TopAnimeQuery = { __typename?: 'Query', Page?: { __typename?: 'Page', pageInfo?: { __typename?: 'PageInfo', hasNextPage?: boolean | null } | null, media?: Array<{ __typename?: 'Media', id: number, duration?: number | null, format?: MediaFormat | null, genres?: Array<string | null> | null, season?: MediaSeason | null, episodes?: number | null, seasonYear?: number | null, averageScore?: number | null, title?: { __typename?: 'MediaTitle', romaji?: string | null } | null, coverImage?: { __typename?: 'MediaCoverImage', color?: string | null, large?: string | null } | null, startDate?: { __typename?: 'FuzzyDate', year?: number | null } | null, endDate?: { __typename?: 'FuzzyDate', year?: number | null } | null, studios?: { __typename?: 'StudioConnection', edges?: Array<{ __typename?: 'StudioEdge', isMain: boolean, node?: { __typename?: 'Studio', id: number, name: string } | null } | null> | null } | null } | null> | null } | null };
 
 
 export const AnimeDocument = gql`
@@ -4846,6 +4846,13 @@ export const TopAnimeDocument = gql`
         color
         large
       }
+      startDate {
+        year
+      }
+      endDate {
+        year
+      }
+      duration
       format
       genres
       season

@@ -34,6 +34,20 @@ export const sizes = {
 export const slugify = (title: string) =>
   title.toLowerCase().replace(/[^\w]+/g, "-");
 
+export const formatDuration = (minutes: number) => {
+  const mins = minutes % 60;
+  const hours = Math.floor(minutes / 60);
+
+  const minsStr = mins > 0 ? mins + " min" + (mins > 1 ? "s" : "") : "";
+
+  const hoursStr =
+    hours > 0
+      ? hours + " hour" + (hours > 1 ? "s" : "") + (mins > 0 ? ", " : "")
+      : "";
+
+  return hoursStr + minsStr;
+};
+
 export const MediaFormatDisplayMap: Record<MediaFormat, string> = {
   [MediaFormat.Tv]: "TV",
   [MediaFormat.Movie]: "Movie",

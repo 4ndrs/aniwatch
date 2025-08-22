@@ -79,7 +79,6 @@ const TopAnimeList = () => {
               <AnimeCard
                 title={anime?.title?.romaji}
                 titleId={titleId}
-                color={anime?.coverImage?.color}
                 imageUrl={anime?.coverImage?.large}
               />
             </InfoPreview>

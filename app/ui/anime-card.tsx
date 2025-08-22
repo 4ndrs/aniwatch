@@ -13,6 +13,7 @@ type Props = {
 
 const AnimeCard = ({ titleId, imageUrl, title, color, size = "lg" }: Props) => (
   <article
+    data-color={color || undefined}
     style={
       {
         width: sizes[size].width,
@@ -25,7 +26,7 @@ const AnimeCard = ({ titleId, imageUrl, title, color, size = "lg" }: Props) => (
 
     <h2
       id={titleId}
-      className="line-clamp-2 w-[185px] max-w-full font-(family-name:--font-overpass) text-sm font-semibold text-wrap transition-colors duration-200 group-hover:text-[var(--anime-color)]"
+      className="line-clamp-2 w-[185px] max-w-full font-(family-name:--font-overpass) text-sm font-semibold text-wrap transition-colors duration-200 group-hover:text-[var(--media-text)] data-[color]:group-hover:text-[var(--anime-color)]"
     >
       {title ?? "No Title"}
     </h2>
