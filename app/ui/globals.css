@@ -17,7 +17,11 @@
   --color-text-lighter: rgb(133, 150, 165);
   --color-foreground-sp: rgb(21, 31, 46);
   --color-shadow-dark: rgb(6, 13, 34);
+  --color-red: rgb(232, 93, 117);
   --color-blue: rgb(61, 180, 242);
+  --color-green: rgb(123, 213, 85);
+  --color-organge: rgb(247, 154, 99);
+  --color-gray-x800: rgb(173, 192, 210);
 }
 
 body {

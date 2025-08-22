@@ -73,7 +73,6 @@ const frieren = {
         node: {
           name: "Toho",
           id: 245,
-          isAnimationStudio: false,
         },
       },
       {
@@ -81,7 +80,6 @@ const frieren = {
         node: {
           name: "MADHOUSE",
           id: 11,
-          isAnimationStudio: true,
         },
       },
       {
@@ -89,7 +87,6 @@ const frieren = {
         node: {
           name: "Shogakukan",
           id: 6161,
-          isAnimationStudio: false,
         },
       },
       {
@@ -97,7 +94,6 @@ const frieren = {
         node: {
           name: "Nippon Television Network",
           id: 6620,
-          isAnimationStudio: false,
         },
       },
       {
@@ -105,7 +101,6 @@ const frieren = {
         node: {
           name: "Shogakukan-Shueisha Productions",
           id: 62,
-          isAnimationStudio: false,
         },
       },
       {
@@ -113,7 +108,6 @@ const frieren = {
         node: {
           name: "Aniplex",
           id: 17,
-          isAnimationStudio: false,
         },
       },
       {
@@ -121,7 +115,6 @@ const frieren = {
         node: {
           name: "Dentsu",
           id: 53,
-          isAnimationStudio: false,
         },
       },
     ],
@@ -202,7 +195,6 @@ const gupMovie = {
         node: {
           name: "Actas",
           id: 60,
-          isAnimationStudio: true,
         },
       },
       {
@@ -210,7 +202,6 @@ const gupMovie = {
         node: {
           name: "Q-Tec",
           id: 6297,
-          isAnimationStudio: false,
         },
       },
       {
@@ -218,7 +209,6 @@ const gupMovie = {
         node: {
           name: "Movic",
           id: 166,
-          isAnimationStudio: false,
         },
       },
       {
@@ -226,7 +216,6 @@ const gupMovie = {
         node: {
           name: "Hakuhodo DY Music & Pictures",
           id: 777,
-          isAnimationStudio: false,
         },
       },
       {
@@ -234,7 +223,6 @@ const gupMovie = {
         node: {
           name: "Lantis",
           id: 104,
-          isAnimationStudio: false,
         },
       },
       {
@@ -242,7 +230,6 @@ const gupMovie = {
         node: {
           name: "Sentai Filmworks",
           id: 376,
-          isAnimationStudio: false,
         },
       },
       {
@@ -250,7 +237,6 @@ const gupMovie = {
         node: {
           name: "Bandai Visual",
           id: 23,
-          isAnimationStudio: false,
         },
       },
     ],
@@ -315,7 +301,6 @@ const priparis = {
         node: {
           name: "Tatsunoko Production",
           id: 103,
-          isAnimationStudio: true,
         },
       },
       {
@@ -323,7 +308,6 @@ const priparis = {
         node: {
           name: "Passione",
           id: 911,
-          isAnimationStudio: true,
         },
       },
       {
@@ -331,7 +315,6 @@ const priparis = {
         node: {
           name: "Avex Pictures",
           id: 6429,
-          isAnimationStudio: false,
         },
       },
       {
@@ -339,7 +322,6 @@ const priparis = {
         node: {
           name: "Takara Tomy",
           id: 327,
-          isAnimationStudio: false,
         },
       },
       {
@@ -347,7 +329,6 @@ const priparis = {
         node: {
           name: "Tatsunoko Production",
           id: 103,
-          isAnimationStudio: true,
         },
       },
       {
@@ -355,7 +336,6 @@ const priparis = {
         node: {
           name: "TV Tokyo",
           id: 16,
-          isAnimationStudio: false,
         },
       },
       {
@@ -363,7 +343,6 @@ const priparis = {
         node: {
           name: "Aeon Entertainment",
           id: 6619,
-          isAnimationStudio: false,
         },
       },
     ],
@@ -428,7 +407,6 @@ const kusuriya = {
         node: {
           name: "Toho",
           id: 245,
-          isAnimationStudio: false,
         },
       },
       {
@@ -436,7 +414,6 @@ const kusuriya = {
         node: {
           name: "TOHO animation STUDIO",
           id: 7368,
-          isAnimationStudio: true,
         },
       },
       {
@@ -444,7 +421,6 @@ const kusuriya = {
         node: {
           name: "OLM",
           id: 28,
-          isAnimationStudio: true,
         },
       },
       {
@@ -452,7 +428,6 @@ const kusuriya = {
         node: {
           name: "Nippon Television Network",
           id: 6620,
-          isAnimationStudio: false,
         },
       },
       {
@@ -460,7 +435,6 @@ const kusuriya = {
         node: {
           name: "Imagica Infos",
           id: 7472,
-          isAnimationStudio: false,
         },
       },
       {
@@ -468,7 +442,6 @@ const kusuriya = {
         node: {
           name: "OLM",
           id: 28,
-          isAnimationStudio: true,
         },
       },
       {
@@ -476,7 +449,6 @@ const kusuriya = {
         node: {
           name: "Dentsu",
           id: 53,
-          isAnimationStudio: false,
         },
       },
       {
@@ -484,7 +456,6 @@ const kusuriya = {
         node: {
           name: "Shogakukan",
           id: 6161,
-          isAnimationStudio: false,
         },
       },
       {
@@ -492,7 +463,6 @@ const kusuriya = {
         node: {
           name: "Square Enix",
           id: 58,
-          isAnimationStudio: false,
         },
       },
     ],

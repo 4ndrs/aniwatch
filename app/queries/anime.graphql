@@ -38,9 +38,8 @@ query Anime($id: Int!) {
       edges {
         isMain
         node {
-          name
           id
-          isAnimationStudio
+          name
         }
       }
     }

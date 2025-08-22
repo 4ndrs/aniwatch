@@ -31,6 +31,9 @@ export const sizes = {
   },
 } as const;
 
+export const slugify = (title: string) =>
+  title.toLowerCase().replace(/[^\w]+/g, "-");
+
 export const MediaFormatDisplayMap: Record<MediaFormat, string> = {
   [MediaFormat.Tv]: "TV",
   [MediaFormat.Movie]: "Movie",

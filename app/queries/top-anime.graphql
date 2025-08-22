@@ -12,7 +12,21 @@ query TopAnime($page: Int!, $perPage: Int!) {
         color
         large
       }
+      format
+      genres
+      season
+      episodes
+      seasonYear
       averageScore
+      studios {
+        edges {
+          isMain
+          node {
+            id
+            name
+          }
+        }
+      }
     }
   }
 }

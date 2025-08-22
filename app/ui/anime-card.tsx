@@ -4,13 +4,14 @@ import Cover, { CoverSkeleton } from "@/app/ui/cover";
 import { sizes } from "@/app/ui/utils";
 
 type Props = {
+  size?: keyof typeof sizes;
   title?: string | null;
   color?: string | null;
-  size?: keyof typeof sizes;
+  titleId?: string;
   imageUrl?: string | null;
 };
 
-const AnimeCard = ({ imageUrl, title, color, size = "lg" }: Props) => (
+const AnimeCard = ({ titleId, imageUrl, title, color, size = "lg" }: Props) => (
   <article
     style={
       {
@@ -22,7 +23,10 @@ const AnimeCard = ({ imageUrl, title, color, size = "lg" }: Props) => (
   >
     <Cover src={imageUrl} alt={title} size={size} className="rounded-sm" />
 
-    <h2 className="line-clamp-2 w-[185px] max-w-full font-(family-name:--font-overpass) text-sm font-semibold text-wrap transition-colors duration-200 group-hover:text-[var(--anime-color)]">
+    <h2
+      id={titleId}
+      className="line-clamp-2 w-[185px] max-w-full font-(family-name:--font-overpass) text-sm font-semibold text-wrap transition-colors duration-200 group-hover:text-[var(--anime-color)]"
+    >
       {title ?? "No Title"}
     </h2>
   </article>

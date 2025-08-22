@@ -2,7 +2,9 @@
 
 import Link from "next/link";
 import AnimeCard, { AnimeCardSkeleton } from "@/app/ui/anime-card";
+import InfoPreview from "@/app/ui/info-preview";
 
+import { slugify } from "@/app/ui/utils";
 import { useCallback, useMemo } from "react";
 import { PER_PAGE, useGetTopAnimeInfiniteQuery } from "@/app/lib/anilist-api";
 
@@ -62,15 +64,28 @@ const TopAnimeList = () => {
 
   return (
     <>
-      {topAnime?.map((anime) => (
-        <Link href={`/anime/${anime?.id}`} key={anime?.id} className="size-fit">
-          <AnimeCard
-            title={anime?.title?.romaji}
-            color={anime?.coverImage?.color}
-            imageUrl={anime?.coverImage?.large}
-          />
-        </Link>
-      ))}
+      {topAnime?.map((anime) => {
+        const titleId = anime?.title?.romaji
+          ? slugify(anime.title.romaji) + "-card"
+          : undefined;
+
+        return (
+          <Link
+            href={`/anime/${anime?.id}`}
+            key={anime?.id}
+            className="size-fit"
+          >
+            <InfoPreview anime={anime} aria-labelledby={titleId}>
+              <AnimeCard
+                title={anime?.title?.romaji}
+                titleId={titleId}
+                color={anime?.coverImage?.color}
+                imageUrl={anime?.coverImage?.large}
+              />
+            </InfoPreview>
+          </Link>
+        );
+      })}
 
       {(isUninitialized || isFetching) &&
         Array.from({ length: PER_PAGE }).map((_, index) => (
