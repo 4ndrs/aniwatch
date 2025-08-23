@@ -7,7 +7,7 @@ import {
 
 import Color from "color";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { MediaFormat, TopAnimeQuery } from "@/app/gql/sdk";
 import { formatDuration, MediaFormatDisplayMap } from "@/app/ui/utils";
 
@@ -45,6 +45,8 @@ const FormatDisplayMap = {
 const InfoPreview = ({ anime, children, ...rest }: Props) => {
   const [rightCollision, setRightCollision] = useState(false);
 
+  const popupRef = useRef<HTMLDivElement>(null);
+
   let season: string | undefined;
   let duration: string | undefined;
 
@@ -76,42 +78,49 @@ const InfoPreview = ({ anime, children, ...rest }: Props) => {
     duration = anime.episodes + " episode" + (anime.episodes === 1 ? "" : "s");
   }
 
+  const detectCollision = ({
+    currentTarget: container,
+  }: {
+    currentTarget: HTMLElement | null;
+  }) => {
+    if (!popupRef.current || !container) {
+      return;
+    }
+
+    const popupWidth = popupRef.current.offsetWidth;
+    const containerRect = container.getBoundingClientRect();
+
+    // 1rem, calc(100%+1rem) below
+    const rem = parseFloat(getComputedStyle(document.documentElement).fontSize);
+
+    const viewportWidth =
+      window.visualViewport?.width ?? document.documentElement.clientWidth;
+
+    // detect collision with the right side of the viewport
+    if (containerRect.right + popupWidth + rem > viewportWidth) {
+      setRightCollision(true);
+      return;
+    }
+
+    setRightCollision(false);
+  };
+
   return (
     <div
-      role="tooltip"
-      className="group relative size-fit"
+      onFocus={detectCollision}
+      onPointerEnter={detectCollision}
       style={{
         ...(generateColors(anime?.coverImage?.color) as React.CSSProperties),
       }}
+      className="group relative size-fit overflow-hidden ring-(--media-text) ring-offset-2 ring-offset-transparent hover:overflow-visible has-[:focus-visible]:overflow-visible has-[:focus-visible]:rounded-sm has-[:focus-visible]:ring-1 [&_*]:focus-visible:outline-none"
     >
       {children}
 
       <div
+        ref={popupRef}
         aria-labelledby={rest["aria-labelledby"]}
         data-collision={rightCollision || undefined}
-        className="bg-foreground-sp pointer-events-none absolute top-[3%] right-0 z-[1] flex min-w-[18.125rem] translate-x-[calc(100%+1rem)] scale-92 flex-col gap-[1.375rem] rounded-md p-6 font-(family-name:--font-overpass) leading-[1.125rem] text-white opacity-0 transition-transform duration-220 group-hover:scale-100 group-hover:opacity-100 before:absolute before:top-3 before:right-[-0.5625rem] before:hidden before:size-2.5 before:[border-width:6px_0_6px_9px] before:[border-style:solid] before:[border-color:transparent_transparent_transparent_var(--color-foreground-sp)] before:content-[''] after:absolute after:top-3 after:left-[-0.5625rem] after:size-2.5 after:[border-width:6px_9px_6px_0] after:[border-style:solid] after:[border-color:transparent_var(--color-foreground-sp)_transparent_transparent] after:content-[''] data-[collision]:left-0 data-[collision]:-translate-x-[calc(100%+1rem)] data-[collision]:before:block data-[collision]:after:hidden"
-        ref={(ref) => {
-          const container = ref?.parentElement;
-
-          if (!ref || !container) {
-            return;
-          }
-
-          const rect = ref.getBoundingClientRect();
-          const containerRect = container.getBoundingClientRect();
-
-          // detect collision with the right side of the viewport
-          // (missing 1rem in calc distance used above (calc(100%+1rem)))
-          if (
-            containerRect.x + containerRect.width + rect.width >
-            window.innerWidth
-          ) {
-            setRightCollision(true);
-            return;
-          }
-
-          setRightCollision(false);
-        }}
+        className="bg-foreground-sp pointer-events-none absolute top-[3%] right-0 z-[1] flex min-w-[18.125rem] translate-x-[calc(100%+1rem)] scale-92 flex-col gap-[1.375rem] rounded-md p-6 font-(family-name:--font-overpass) leading-[1.125rem] text-white opacity-0 transition-[scale,opacity] duration-220 group-hover:scale-100 group-hover:opacity-100 group-has-focus:scale-100 group-has-focus:opacity-100 before:absolute before:top-3 before:right-[-0.5625rem] before:hidden before:size-2.5 before:[border-width:6px_0_6px_9px] before:[border-style:solid] before:[border-color:transparent_transparent_transparent_var(--color-foreground-sp)] before:content-[''] after:absolute after:top-3 after:left-[-0.5625rem] after:size-2.5 after:[border-width:6px_9px_6px_0] after:[border-style:solid] after:[border-color:transparent_var(--color-foreground-sp)_transparent_transparent] after:content-[''] data-[collision]:left-0 data-[collision]:-translate-x-[calc(100%+1rem)] data-[collision]:before:block data-[collision]:after:hidden"
       >
         <div className="text-gray-x800 flex items-center justify-between font-semibold capitalize">
           <span aria-label="Season">{season}</span>

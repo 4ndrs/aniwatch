@@ -70,19 +70,15 @@ const TopAnimeList = () => {
           : undefined;
 
         return (
-          <Link
-            href={`/anime/${anime?.id}`}
-            key={anime?.id}
-            className="size-fit"
-          >
-            <InfoPreview anime={anime} aria-labelledby={titleId}>
+          <InfoPreview key={anime?.id} anime={anime} aria-labelledby={titleId}>
+            <Link href={`/anime/${anime?.id}`}>
               <AnimeCard
                 title={anime?.title?.romaji}
                 titleId={titleId}
                 imageUrl={anime?.coverImage?.large}
               />
-            </InfoPreview>
-          </Link>
+            </Link>
+          </InfoPreview>
         );
       })}
 
