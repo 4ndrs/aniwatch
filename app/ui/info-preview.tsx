@@ -45,27 +45,36 @@ const FormatDisplayMap = {
 const InfoPreview = ({ anime, children, ...rest }: Props) => {
   const [rightCollision, setRightCollision] = useState(false);
 
-  const season =
-    anime?.season && anime.seasonYear
-      ? anime.season.toLowerCase() + " " + anime.seasonYear
-      : anime?.startDate?.year &&
-          anime.endDate?.year &&
-          anime.startDate.year !== anime.endDate?.year
-        ? anime.startDate.year + " - " + anime.endDate.year
-        : anime?.startDate?.year;
+  let season: string | undefined;
+  let duration: string | undefined;
 
   const format = anime?.format && FormatDisplayMap[anime.format];
 
-  const duration =
+  if (anime?.season && anime.seasonYear) {
+    season = `${anime.season.toLowerCase()} ${anime.seasonYear}`;
+  } else if (
+    anime?.startDate?.year &&
+    anime.endDate?.year &&
+    anime.startDate.year !== anime.endDate.year
+  ) {
+    season = `${anime.startDate.year} - ${anime.endDate.year}`;
+  } else if (anime?.startDate?.year) {
+    season = anime?.startDate?.year?.toString();
+  }
+
+  if (
     anime?.format &&
     anime.format === MediaFormat.Movie &&
     anime.duration != null
-      ? formatDuration(anime.duration)
-      : anime?.format &&
-          anime.format !== MediaFormat.Movie &&
-          anime.episodes != null
-        ? anime.episodes + " episode" + (anime.episodes === 1 ? "" : "s")
-        : undefined;
+  ) {
+    duration = formatDuration(anime.duration);
+  } else if (
+    anime?.format &&
+    anime.format !== MediaFormat.Movie &&
+    anime.episodes != null
+  ) {
+    duration = anime.episodes + " episode" + (anime.episodes === 1 ? "" : "s");
+  }
 
   return (
     <div
