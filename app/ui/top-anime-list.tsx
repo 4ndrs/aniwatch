@@ -4,15 +4,16 @@ import Link from "next/link";
 import AnimeCard, { AnimeCardSkeleton } from "@/app/ui/anime-card";
 import InfoPreview from "@/app/ui/info-preview";
 
-import { slugify } from "@/app/ui/utils";
-import { useSearchParams } from "next/navigation";
+import { useDebounce } from "@/app/hooks/debounce";
+import { useQueryState } from "nuqs";
 import { useCallback, useMemo } from "react";
+import { DEBOUNCE_VALUE, slugify } from "@/app/ui/utils";
 import { PER_PAGE, useGetTopAnimeInfiniteQuery } from "@/app/lib/anilist-api";
 
 import type { TopAnimeQuery } from "@/app/gql/graphql";
 
 const TopAnimeList = () => {
-  const search = useSearchParams().get("search");
+  const search = useDebounce(useQueryState("search")[0], DEBOUNCE_VALUE);
 
   const {
     error,

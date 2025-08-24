@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef } from "react";
+import { DEBOUNCE_VALUE } from "@/app/ui/utils";
 import { FaSearch, FaTimes } from "react-icons/fa";
 import { useQueryState, parseAsString, debounce, defaultRateLimit } from "nuqs";
 
@@ -14,7 +15,7 @@ const SearchBar = ({ id }: Props) => {
     parseAsString.withDefault("").withOptions({
       history: "push",
       shallow: false,
-      limitUrlUpdates: debounce(500),
+      limitUrlUpdates: debounce(DEBOUNCE_VALUE),
     }),
   );
 

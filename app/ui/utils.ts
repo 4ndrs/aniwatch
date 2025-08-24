@@ -31,6 +31,8 @@ export const sizes = {
   },
 } as const;
 
+export const DEBOUNCE_VALUE = 500;
+
 export const slugify = (title: string) =>
   title.toLowerCase().replace(/[^\w]+/g, "-");
 
