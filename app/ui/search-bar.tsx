@@ -13,8 +13,8 @@ const SearchBar = ({ id }: Props) => {
   const [search, setSearch] = useQueryState(
     "search",
     parseAsString.withDefault("").withOptions({
+      shallow: true,
       history: "push",
-      shallow: false,
       limitUrlUpdates: debounce(DEBOUNCE_VALUE),
     }),
   );

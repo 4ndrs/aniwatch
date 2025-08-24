@@ -13,7 +13,8 @@ import { PER_PAGE, useGetTopAnimeInfiniteQuery } from "@/app/lib/anilist-api";
 import type { TopAnimeQuery } from "@/app/gql/graphql";
 
 const TopAnimeList = () => {
-  const search = useDebounce(useQueryState("search")[0], DEBOUNCE_VALUE);
+  const search = useQueryState("search")[0];
+  const debouncedSearch = useDebounce(search, DEBOUNCE_VALUE, search == null);
 
   const {
     error,
@@ -22,7 +23,7 @@ const TopAnimeList = () => {
     fetchNextPage,
     isUninitialized,
     currentData: data,
-  } = useGetTopAnimeInfiniteQuery({ search });
+  } = useGetTopAnimeInfiniteQuery({ search: debouncedSearch });
 
   const topAnime = useMemo(
     () =>
