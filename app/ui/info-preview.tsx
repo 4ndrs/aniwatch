@@ -123,7 +123,7 @@ const InfoPreview = ({ anime, children, ...rest }: Props) => {
         className="bg-foreground-sp pointer-events-none absolute top-[3%] right-0 z-[1] flex min-w-[18.125rem] translate-x-[calc(100%+1rem)] scale-92 flex-col gap-[1.375rem] rounded-md p-6 font-(family-name:--font-overpass) leading-[1.125rem] text-white opacity-0 transition-[scale,opacity] duration-220 group-hover:scale-100 group-hover:opacity-100 group-has-focus:scale-100 group-has-focus:opacity-100 before:absolute before:top-3 before:right-[-0.5625rem] before:hidden before:size-2.5 before:[border-width:6px_0_6px_9px] before:[border-style:solid] before:[border-color:transparent_transparent_transparent_var(--color-foreground-sp)] before:content-[''] after:absolute after:top-3 after:left-[-0.5625rem] after:size-2.5 after:[border-width:6px_9px_6px_0] after:[border-style:solid] after:[border-color:transparent_var(--color-foreground-sp)_transparent_transparent] after:content-[''] data-[collision]:left-0 data-[collision]:-translate-x-[calc(100%+1rem)] data-[collision]:before:block data-[collision]:after:hidden"
       >
         <div className="text-gray-x800 flex items-center justify-between font-semibold capitalize">
-          <span aria-label="Season">{season}</span>
+          <span aria-label="Season">{season || "TBA"}</span>
 
           {anime?.averageScore && (
             <span

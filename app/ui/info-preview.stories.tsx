@@ -693,3 +693,73 @@ export const FrierenRightCollision: Story = {
     </div>
   ),
 };
+
+const bocchi = {
+  id: 186712,
+  title: {
+    romaji: "Bocchi the Rock! 2nd Season",
+  },
+  coverImage: {
+    color: "#f1d65d",
+    large:
+      "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx186712-d5I2TjUQcHuI.jpg",
+  },
+  startDate: {
+    year: null,
+  },
+  endDate: {
+    year: null,
+  },
+  duration: null,
+  format: MediaFormat.Tv,
+  genres: ["Comedy", "Music", "Slice of Life"],
+  season: null,
+  episodes: null,
+  seasonYear: null,
+  averageScore: null,
+  studios: {
+    edges: [
+      {
+        isMain: true,
+        node: {
+          id: 6222,
+          name: "CloverWorks",
+        },
+      },
+      {
+        isMain: false,
+        node: {
+          id: 17,
+          name: "Aniplex",
+        },
+      },
+      {
+        isMain: false,
+        node: {
+          id: 797,
+          name: "Houbunsha",
+        },
+      },
+    ],
+  },
+} satisfies Anime;
+
+export const BocchiTheRockTBA: Story = {
+  args: { anime: bocchi },
+  render: (args) => (
+    <div className="flex gap-2">
+      <div className="w-[381px]">
+        <InfoPreview
+          {...args}
+          aria-labelledby={slugify(bocchi.title.romaji) + "-card"}
+        >
+          <AnimeCard
+            title={bocchi.title.romaji}
+            titleId={slugify(bocchi.title.romaji) + "-card"}
+            imageUrl={bocchi.coverImage.large}
+          />
+        </InfoPreview>
+      </div>
+    </div>
+  ),
+};

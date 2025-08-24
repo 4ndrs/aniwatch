@@ -10,7 +10,7 @@
     "codegen": "graphql-codegen",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "deploy-storybook": "gh-pages -d storybook-static"
+    "deploy-storybook": "cp -rv vercel.json storybook-static && gh-pages -d storybook-static"
   },
   "prettier": {
     "plugins": [

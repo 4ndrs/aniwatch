@@ -42,8 +42,8 @@ const SearchBar = ({ id }: Props) => {
         id={id}
         ref={inputRef}
         value={search}
-        spellCheck={false}
         inputMode="search"
+        spellCheck={false}
         autoCorrect="off"
         autoComplete="off"
         autoCapitalize="off"

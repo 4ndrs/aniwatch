@@ -4838,7 +4838,7 @@ export const TopAnimeDocument = gql`
     pageInfo {
       hasNextPage
     }
-    media(type: ANIME, sort: SCORE_DESC, search: $search) {
+    media(type: ANIME, sort: SCORE_DESC, search: $search, isAdult: false) {
       id
       title {
         romaji
