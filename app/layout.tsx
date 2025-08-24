@@ -1,4 +1,5 @@
 import Providers from "@/app/ui/providers";
+import Disclaimer from "@/app/ui/disclaimer";
 
 import { NuqsAdapter } from "nuqs/adapters/next/app";
 import { Overpass, Roboto } from "next/font/google";
@@ -55,7 +56,10 @@ export default function RootLayout({
         className={`${roboto.variable} ${overpass.variable} pb-20 antialiased`}
       >
         <NuqsAdapter>
-          <Providers>{children}</Providers>
+          <Providers>
+            {children}
+            <Disclaimer />
+          </Providers>
         </NuqsAdapter>
       </body>
     </html>
