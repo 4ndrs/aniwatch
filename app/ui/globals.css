@@ -15,13 +15,19 @@
   --color-text: rgb(159, 173, 189);
   --color-text-light: rgb(114, 138, 161);
   --color-text-lighter: rgb(133, 150, 165);
+
   --color-foreground-sp: rgb(21, 31, 46);
   --color-shadow-dark: rgb(6, 13, 34);
+
   --color-red: rgb(232, 93, 117);
   --color-blue: rgb(61, 180, 242);
   --color-green: rgb(123, 213, 85);
   --color-orange: rgb(247, 154, 99);
+
+  --color-gray-x400: rgb(81, 97, 112);
+  --color-gray-x500: rgb(100, 115, 128);
   --color-gray-x800: rgb(173, 192, 210);
+  --color-gray-x900: rgb(201, 215, 227);
 }
 
 body {

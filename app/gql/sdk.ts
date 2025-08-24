@@ -4683,6 +4683,7 @@ export type AnimeQuery = { __typename?: 'Query', Media?: { __typename?: 'Media',
 export type TopAnimeQueryVariables = Exact<{
   page: Scalars['Int']['input'];
   perPage: Scalars['Int']['input'];
+  search?: InputMaybe<Scalars['String']['input']>;
 }>;
 
 
@@ -4832,12 +4833,12 @@ export const AnimeDocument = gql`
 }
     `;
 export const TopAnimeDocument = gql`
-    query TopAnime($page: Int!, $perPage: Int!) {
+    query TopAnime($page: Int!, $perPage: Int!, $search: String) {
   Page(page: $page, perPage: $perPage) {
     pageInfo {
       hasNextPage
     }
-    media(type: ANIME, sort: SCORE_DESC) {
+    media(type: ANIME, sort: SCORE_DESC, search: $search) {
       id
       title {
         romaji

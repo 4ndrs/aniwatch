@@ -4,15 +4,27 @@ import { createApi } from "@reduxjs/toolkit/query/react";
 import type { BaseQueryFn } from "@reduxjs/toolkit/query";
 import type { TopAnimeQuery } from "@/app/gql/sdk";
 
+type Search = string | null;
+
+type TopAnimeQueryArg = {
+  search?: Search;
+};
+
 type InitialPageParam = {
   page: number;
   perPage: number;
+  search?: Search;
 };
 
 type GraphQLBaseQueryArgs<T> = {
   page: number;
   perPage: number;
-  callback: (args: { page: number; perPage: number }) => Promise<T>;
+  search?: Search;
+  callback: (args: {
+    page: number;
+    perPage: number;
+    search?: Search;
+  }) => Promise<T>;
 };
 
 export const PER_PAGE = 20;
@@ -21,9 +33,9 @@ const baseQuery: BaseQueryFn<
   GraphQLBaseQueryArgs<unknown>,
   unknown,
   unknown
-> = async ({ page, perPage, callback }) => {
+> = async ({ search, page, perPage, callback }) => {
   try {
-    const data = await callback({ page, perPage });
+    const data = await callback({ search, page, perPage });
 
     return { data };
   } catch (error) {
@@ -36,7 +48,11 @@ const baseQuery: BaseQueryFn<
 export const anilistApi = createApi({
   baseQuery,
   endpoints: (build) => ({
-    getTopAnime: build.infiniteQuery<TopAnimeQuery, void, InitialPageParam>({
+    getTopAnime: build.infiniteQuery<
+      TopAnimeQuery,
+      TopAnimeQueryArg | void,
+      InitialPageParam
+    >({
       keepUnusedDataFor: 60 * 60 * 60, // don't refresh often, messes up scroll when doing infinite scrolling
       infiniteQueryOptions: {
         initialPageParam: {
@@ -56,7 +72,8 @@ export const anilistApi = createApi({
           };
         },
       },
-      query: ({ pageParam }) => ({
+      query: ({ queryArg, pageParam }) => ({
+        ...queryArg,
         ...pageParam,
         callback: sdk.TopAnime,
       }),

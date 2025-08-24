@@ -5,20 +5,23 @@ import AnimeCard, { AnimeCardSkeleton } from "@/app/ui/anime-card";
 import InfoPreview from "@/app/ui/info-preview";
 
 import { slugify } from "@/app/ui/utils";
+import { useSearchParams } from "next/navigation";
 import { useCallback, useMemo } from "react";
 import { PER_PAGE, useGetTopAnimeInfiniteQuery } from "@/app/lib/anilist-api";
 
 import type { TopAnimeQuery } from "@/app/gql/graphql";
 
 const TopAnimeList = () => {
+  const search = useSearchParams().get("search");
+
   const {
-    data,
     error,
     isFetching,
     hasNextPage,
     fetchNextPage,
     isUninitialized,
-  } = useGetTopAnimeInfiniteQuery();
+    currentData: data,
+  } = useGetTopAnimeInfiniteQuery({ search });
 
   const topAnime = useMemo(
     () =>

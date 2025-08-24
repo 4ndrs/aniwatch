@@ -1,5 +1,6 @@
 import Providers from "@/app/ui/providers";
 
+import { NuqsAdapter } from "nuqs/adapters/next/app";
 import { Overpass, Roboto } from "next/font/google";
 
 import "@/app/ui/globals.css";
@@ -15,7 +16,7 @@ const roboto = Roboto({
 const overpass = Overpass({
   variable: "--font-overpass",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["400", "500", "600", "700", "800"],
 });
 
 const title = "AniWatch";
@@ -27,6 +28,9 @@ export const metadata: Metadata = {
   title: {
     template: "%s · " + title,
     default: title,
+  },
+  alternates: {
+    canonical: "/",
   },
   description,
   openGraph: {
@@ -50,7 +54,9 @@ export default function RootLayout({
       <body
         className={`${roboto.variable} ${overpass.variable} pb-20 antialiased`}
       >
-        <Providers>{children}</Providers>
+        <NuqsAdapter>
+          <Providers>{children}</Providers>
+        </NuqsAdapter>
       </body>
     </html>
   );
