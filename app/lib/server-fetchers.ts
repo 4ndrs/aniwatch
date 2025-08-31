@@ -4,6 +4,8 @@ import { unstable_cache } from "next/cache";
 
 import "server-only";
 
+const REVALIDATE_TIME = 60 * 60 * 24; // 24 hours
+
 export const loadAnime = cache(
   unstable_cache(
     async (id: number) => {
@@ -23,6 +25,36 @@ export const loadAnime = cache(
       }
     },
     undefined,
-    { revalidate: 86400 }, // Cache for 24 hours
+    { revalidate: REVALIDATE_TIME },
+  ),
+);
+
+export const getMinMaxDates = cache(
+  unstable_cache(
+    async () => {
+      console.log("querying min/max dates");
+
+      const defaultMin = 1940;
+      const defaultMax = new Date().getFullYear() + 1;
+
+      try {
+        const { min: rawMin, max: rawMax } = await sdk.YearBounds();
+
+        const min = rawMin?.startDate?.year ?? defaultMin;
+        const max = rawMax?.startDate?.year ?? defaultMax;
+
+        return { min, max };
+      } catch (error) {
+        console.error(
+          "Error getting min/max year bounds:\n\n",
+          error,
+          `\n\nreturning default values min: ${defaultMin}, max: ${defaultMax}`,
+        );
+
+        return { min: defaultMin, max: defaultMax };
+      }
+    },
+    undefined,
+    { revalidate: REVALIDATE_TIME },
   ),
 );

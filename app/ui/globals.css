@@ -1,17 +1,14 @@
 @import "tailwindcss";
 
-:root {
-  --background: rgb(11, 22, 34);
-  --foreground: rgb(139, 160, 178);
-}
-
-@theme inline {
+@theme {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-roboto);
-}
 
-@theme {
+  --font-sans: var(--font-roboto);
+
+  --background: rgb(11, 22, 34);
+  --foreground: rgb(139, 160, 178);
+
   --color-text: rgb(159, 173, 189);
   --color-text-light: rgb(114, 138, 161);
   --color-text-lighter: rgb(133, 150, 165);
@@ -28,6 +25,8 @@
   --color-gray-x500: rgb(100, 115, 128);
   --color-gray-x800: rgb(173, 192, 210);
   --color-gray-x900: rgb(201, 215, 227);
+
+  --color-blue-x600: rgb(61, 180, 242);
 }
 
 body {

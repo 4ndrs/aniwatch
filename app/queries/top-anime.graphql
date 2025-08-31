@@ -1,9 +1,20 @@
-query TopAnime($page: Int!, $perPage: Int!, $search: String) {
+query TopAnime(
+  $page: Int!
+  $perPage: Int!
+  $search: String
+  $startYear: FuzzyDateInt
+) {
   Page(page: $page, perPage: $perPage) {
     pageInfo {
       hasNextPage
     }
-    media(type: ANIME, sort: SCORE_DESC, search: $search, isAdult: false) {
+    media(
+      type: ANIME
+      sort: SCORE_DESC
+      search: $search
+      isAdult: false
+      startDate: $startYear
+    ) {
       id
       title {
         romaji
@@ -37,4 +48,3 @@ query TopAnime($page: Int!, $perPage: Int!, $search: String) {
     }
   }
 }
-

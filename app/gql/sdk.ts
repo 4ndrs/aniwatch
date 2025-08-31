@@ -4684,10 +4684,18 @@ export type TopAnimeQueryVariables = Exact<{
   page: Scalars['Int']['input'];
   perPage: Scalars['Int']['input'];
   search?: InputMaybe<Scalars['String']['input']>;
+  startYear?: InputMaybe<Scalars['FuzzyDateInt']['input']>;
 }>;
 
 
 export type TopAnimeQuery = { __typename?: 'Query', Page?: { __typename?: 'Page', pageInfo?: { __typename?: 'PageInfo', hasNextPage?: boolean | null } | null, media?: Array<{ __typename?: 'Media', id: number, duration?: number | null, format?: MediaFormat | null, genres?: Array<string | null> | null, season?: MediaSeason | null, episodes?: number | null, seasonYear?: number | null, averageScore?: number | null, title?: { __typename?: 'MediaTitle', romaji?: string | null } | null, coverImage?: { __typename?: 'MediaCoverImage', color?: string | null, large?: string | null } | null, startDate?: { __typename?: 'FuzzyDate', year?: number | null } | null, endDate?: { __typename?: 'FuzzyDate', year?: number | null } | null, studios?: { __typename?: 'StudioConnection', edges?: Array<{ __typename?: 'StudioEdge', isMain: boolean, node?: { __typename?: 'Studio', id: number, name: string } | null } | null> | null } | null } | null> | null } | null };
+
+export type YearBoundsQueryVariables = Exact<{
+  minDate?: InputMaybe<Scalars['FuzzyDateInt']['input']>;
+}>;
+
+
+export type YearBoundsQuery = { __typename?: 'Query', min?: { __typename?: 'Media', startDate?: { __typename?: 'FuzzyDate', year?: number | null } | null } | null, max?: { __typename?: 'Media', startDate?: { __typename?: 'FuzzyDate', year?: number | null } | null } | null };
 
 
 export const AnimeDocument = gql`
@@ -4833,12 +4841,18 @@ export const AnimeDocument = gql`
 }
     `;
 export const TopAnimeDocument = gql`
-    query TopAnime($page: Int!, $perPage: Int!, $search: String) {
+    query TopAnime($page: Int!, $perPage: Int!, $search: String, $startYear: FuzzyDateInt) {
   Page(page: $page, perPage: $perPage) {
     pageInfo {
       hasNextPage
     }
-    media(type: ANIME, sort: SCORE_DESC, search: $search, isAdult: false) {
+    media(
+      type: ANIME
+      sort: SCORE_DESC
+      search: $search
+      isAdult: false
+      startDate: $startYear
+    ) {
       id
       title {
         romaji
@@ -4873,6 +4887,20 @@ export const TopAnimeDocument = gql`
   }
 }
     `;
+export const YearBoundsDocument = gql`
+    query YearBounds($minDate: FuzzyDateInt = 19000101) {
+  min: Media(type: ANIME, sort: START_DATE, startDate_greater: $minDate) {
+    startDate {
+      year
+    }
+  }
+  max: Media(type: ANIME, sort: START_DATE_DESC, startDate_greater: $minDate) {
+    startDate {
+      year
+    }
+  }
+}
+    `;
 
 export type SdkFunctionWrapper = <T>(action: (requestHeaders?:Record<string, string>) => Promise<T>, operationName: string, operationType?: string, variables?: any) => Promise<T>;
 
@@ -4886,6 +4914,9 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     TopAnime(variables: TopAnimeQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<TopAnimeQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<TopAnimeQuery>({ document: TopAnimeDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'TopAnime', 'query', variables);
+    },
+    YearBounds(variables?: YearBoundsQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<YearBoundsQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<YearBoundsQuery>({ document: YearBoundsDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'YearBounds', 'query', variables);
     }
   };
 }

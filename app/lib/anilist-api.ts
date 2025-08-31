@@ -4,27 +4,23 @@ import { createApi } from "@reduxjs/toolkit/query/react";
 import type { BaseQueryFn } from "@reduxjs/toolkit/query";
 import type { TopAnimeQuery } from "@/app/gql/sdk";
 
+type Year = string | null;
 type Search = string | null;
 
 type TopAnimeQueryArg = {
+  year?: Year;
   search?: Search;
 };
 
 type InitialPageParam = {
   page: number;
   perPage: number;
-  search?: Search;
 };
 
 type GraphQLBaseQueryArgs<T> = {
   page: number;
   perPage: number;
-  search?: Search;
-  callback: (args: {
-    page: number;
-    perPage: number;
-    search?: Search;
-  }) => Promise<T>;
+  callback: (args: { page: number; perPage: number }) => Promise<T>;
 };
 
 export const PER_PAGE = 20;
@@ -33,9 +29,9 @@ const baseQuery: BaseQueryFn<
   GraphQLBaseQueryArgs<unknown>,
   unknown,
   unknown
-> = async ({ search, page, perPage, callback }) => {
+> = async ({ page, perPage, callback }) => {
   try {
-    const data = await callback({ search, page, perPage });
+    const data = await callback({ page, perPage });
 
     return { data };
   } catch (error) {
@@ -73,9 +69,14 @@ export const anilistApi = createApi({
         },
       },
       query: ({ queryArg, pageParam }) => ({
-        ...queryArg,
         ...pageParam,
-        callback: sdk.TopAnime,
+        callback: ({ page, perPage }) =>
+          sdk.TopAnime({
+            page,
+            perPage,
+            search: queryArg?.search || undefined,
+            startYear: (queryArg?.year && queryArg.year + "0000") || undefined,
+          }),
       }),
     }),
   }),

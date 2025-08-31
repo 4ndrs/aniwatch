@@ -71,7 +71,7 @@ const SearchBar = ({ id }: Props) => {
         }}
         className="text-gray-x400 hover:text-gray-x500 ring-blue focus-visible:text-gray-x500 shrink-0 cursor-pointer rounded-sm ring-offset-2 ring-offset-transparent transition-colors duration-200 outline-none focus-visible:ring-1 disabled:pointer-events-none disabled:opacity-0"
       >
-        <FaTimes className="h-4 w-[0.6875rem]" />
+        <FaTimes className="size-4" />
       </button>
     </div>
   );

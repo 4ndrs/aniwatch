@@ -1,0 +1,13 @@
+# minDate here is used to avoid nulls in the queried data's dates
+query YearBounds($minDate: FuzzyDateInt = 19000101) {
+  min: Media(type: ANIME, sort: START_DATE, startDate_greater: $minDate) {
+    startDate {
+      year
+    }
+  }
+  max: Media(type: ANIME, sort: START_DATE_DESC, startDate_greater: $minDate) {
+    startDate {
+      year
+    }
+  }
+}
