@@ -4684,7 +4684,7 @@ export type TopAnimeQueryVariables = Exact<{
   page: Scalars['Int']['input'];
   perPage: Scalars['Int']['input'];
   search?: InputMaybe<Scalars['String']['input']>;
-  startYear?: InputMaybe<Scalars['FuzzyDateInt']['input']>;
+  startYear?: InputMaybe<Scalars['String']['input']>;
 }>;
 
 
@@ -4841,7 +4841,7 @@ export const AnimeDocument = gql`
 }
     `;
 export const TopAnimeDocument = gql`
-    query TopAnime($page: Int!, $perPage: Int!, $search: String, $startYear: FuzzyDateInt) {
+    query TopAnime($page: Int!, $perPage: Int!, $search: String, $startYear: String) {
   Page(page: $page, perPage: $perPage) {
     pageInfo {
       hasNextPage
@@ -4851,7 +4851,7 @@ export const TopAnimeDocument = gql`
       sort: SCORE_DESC
       search: $search
       isAdult: false
-      startDate: $startYear
+      startDate_like: $startYear
     ) {
       id
       title {

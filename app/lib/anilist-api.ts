@@ -75,7 +75,7 @@ export const anilistApi = createApi({
             page,
             perPage,
             search: queryArg?.search || undefined,
-            startYear: (queryArg?.year && queryArg.year + "0000") || undefined,
+            startYear: (queryArg?.year && queryArg.year + "%") || undefined,
           }),
       }),
     }),

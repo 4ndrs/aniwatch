@@ -2,7 +2,7 @@ query TopAnime(
   $page: Int!
   $perPage: Int!
   $search: String
-  $startYear: FuzzyDateInt
+  $startYear: String
 ) {
   Page(page: $page, perPage: $perPage) {
     pageInfo {
@@ -13,7 +13,7 @@ query TopAnime(
       sort: SCORE_DESC
       search: $search
       isAdult: false
-      startDate: $startYear
+      startDate_like: $startYear
     ) {
       id
       title {
