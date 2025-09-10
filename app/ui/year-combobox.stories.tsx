@@ -1,7 +1,7 @@
-import YearListBox from "@/app/ui/year-combo-box/list-box";
 import YearComboBox from "@/app/ui/year-combo-box";
 
 import { Suspense } from "react";
+import { NuqsAdapter } from "nuqs/adapters/react";
 
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 
@@ -18,21 +18,19 @@ const promise = new Promise<{ min: number; max: number }>((resolve) =>
   setTimeout(() => resolve({ min: 1974, max: 2025 }), 8000),
 );
 
-const SuspenseTesting = () => (
-  <Suspense fallback="loading...">
-    <YearListBox promise={promise} />
-  </Suspense>
-);
-
 export const Default: Story = {
   args: {
-    children: <SuspenseTesting />,
+    promise,
     "aria-labelledby": "year-label",
   },
   render: (args) => (
-    <div className="w-40">
-      <label id="year-label">Year</label>
-      <YearComboBox {...args} />
-    </div>
+    <NuqsAdapter>
+      <Suspense fallback="loading...">
+        <div className="w-40">
+          <label id="year-label">Year</label>
+          <YearComboBox {...args} />
+        </div>
+      </Suspense>
+    </NuqsAdapter>
   ),
 };
