@@ -1,5 +1,4 @@
 import SearchBar from "@/app/ui/search-bar";
-import YearListBox from "@/app/ui/year-combo-box/list-box";
 import TopAnimeList from "@/app/ui/top-anime-list";
 import YearComboBox from "@/app/ui/year-combo-box";
 
@@ -39,12 +38,11 @@ const Home = () => (
           Year
         </label>
 
-        <Suspense>
-          <YearComboBox aria-labelledby="year-label">
-            <Suspense fallback="Loading...">
-              <YearListBox promise={getMinMaxDates()} />
-            </Suspense>
-          </YearComboBox>
+        <Suspense fallback="Loading...">
+          <YearComboBox
+            aria-labelledby="year-label"
+            promise={getMinMaxDates()}
+          />
         </Suspense>
       </div>
     </div>

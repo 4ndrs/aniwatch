@@ -1,18 +1,27 @@
 "use client";
 
+import {
+  Input,
+  Button,
+  Popover,
+  ListBox,
+  ComboBox,
+  ListBoxItem,
+} from "react-aria-components";
+
+import { use } from "react";
 import { useQueryState } from "nuqs";
 import { useCallback, useState } from "react";
 import { FaChevronDown, FaTimes } from "react-icons/fa";
-import { Input, Button, Popover, ComboBox } from "react-aria-components";
 
 type Props = {
-  children: React.ReactNode;
+  promise: Promise<{ min: number; max: number }>;
   "aria-labelledby": string;
 };
 
 const EMPTY_VALUE = "Any";
 
-const YearComboBox = ({ children, ...rest }: Props) => {
+const YearComboBox = ({ promise, ...rest }: Props) => {
   const [isOpen, setIsOpen] = useState(false);
   const [boxWidth, setBoxWidth] = useState(0);
   const [inputValue, setInputValue] = useState(EMPTY_VALUE);
@@ -35,6 +44,17 @@ const YearComboBox = ({ children, ...rest }: Props) => {
 
     return () => observer.disconnect();
   }, []);
+
+  const { min, max } = use(promise);
+
+  const years = Array.from({ length: max - min + 1 }, (_, index) => {
+    const year = (max - index).toString();
+
+    return {
+      id: year,
+      name: year,
+    };
+  });
 
   return (
     <ComboBox
@@ -94,7 +114,13 @@ const YearComboBox = ({ children, ...rest }: Props) => {
         }
         className="data-entering:animate-in data-entering:fade-in data-exiting:animate-out data-exiting:fade-out bg-foreground-sp max-h-[31.25rem] w-(--box-width) overflow-auto rounded-md p-2.5"
       >
-        {children}
+        <ListBox items={years} className="flex w-full flex-col outline-hidden">
+          {({ name }) => (
+            <ListBoxItem className="group text-text hover:text-blue-x600 hover:bg-background focus:text-blue-x600 focus:bg-background flex cursor-pointer items-center rounded-sm px-3 py-2.5 font-(family-name:--font-overpass) text-sm leading-4 font-semibold outline-hidden transition-colors duration-200 ease-in-out select-none">
+              {name}
+            </ListBoxItem>
+          )}
+        </ListBox>
       </Popover>
     </ComboBox>
   );
