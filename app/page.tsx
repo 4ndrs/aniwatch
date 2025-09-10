@@ -1,6 +1,7 @@
 import SearchBar from "@/app/ui/search-bar";
 import TopAnimeList from "@/app/ui/top-anime-list";
 import YearComboBox from "@/app/ui/year-combo-box";
+import FieldSkeleton from "@/app/ui/field-skeleton";
 
 import { Suspense } from "react";
 import { getMinMaxDates } from "@/app/lib/server-fetchers";
@@ -25,7 +26,7 @@ const Home = () => (
           Search
         </label>
 
-        <Suspense>
+        <Suspense fallback=<FieldSkeleton />>
           <SearchBar id="search-bar" />
         </Suspense>
       </div>
@@ -38,7 +39,7 @@ const Home = () => (
           Year
         </label>
 
-        <Suspense fallback="Loading...">
+        <Suspense fallback=<FieldSkeleton />>
           <YearComboBox
             aria-labelledby="year-label"
             promise={getMinMaxDates()}
