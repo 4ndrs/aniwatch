@@ -1,60 +1,53 @@
+"use cache";
+
 import { sdk } from "@/app/lib/anilist";
-import { cache } from "react";
-import { unstable_cache } from "next/cache";
+import { cacheLife } from "next/cache";
 
 import "server-only";
 
 const REVALIDATE_TIME = 60 * 60 * 24; // 24 hours
 
-export const loadAnime = cache(
-  unstable_cache(
-    async (id: number) => {
-      try {
-        console.log("querying anime with id: ", id);
+export const loadAnime = async (id: number) => {
+  cacheLife({ revalidate: REVALIDATE_TIME });
 
-        const anime = (await sdk.Anime({ id })).Media;
+  try {
+    console.log("querying anime with id: ", id);
 
-        if (!anime) {
-          throw new Error("Anime not found");
-        }
+    const anime = (await sdk.Anime({ id })).Media;
 
-        return { anime, error: false } as const;
-      } catch (error) {
-        console.error(`Error loading anime with id ${id}:`, error);
-        return { error: true } as const;
-      }
-    },
-    undefined,
-    { revalidate: REVALIDATE_TIME },
-  ),
-);
+    if (!anime) {
+      throw new Error("Anime not found");
+    }
 
-export const getMinMaxDates = cache(
-  unstable_cache(
-    async () => {
-      console.log("querying min/max dates");
+    return { anime, error: false } as const;
+  } catch (error) {
+    console.error(`Error loading anime with id ${id}:`, error);
+    return { error: true } as const;
+  }
+};
 
-      const defaultMin = 1940;
-      const defaultMax = new Date().getFullYear() + 1;
+export const getMinMaxDates = async () => {
+  cacheLife({ revalidate: REVALIDATE_TIME });
 
-      try {
-        const { min: rawMin, max: rawMax } = await sdk.YearBounds();
+  console.log("querying min/max dates");
 
-        const min = rawMin?.startDate?.year ?? defaultMin;
-        const max = rawMax?.startDate?.year ?? defaultMax;
+  const defaultMin = 1940;
+  const defaultMax = new Date().getFullYear() + 1;
 
-        return { min, max };
-      } catch (error) {
-        console.error(
-          "Error getting min/max year bounds:\n\n",
-          error,
-          `\n\nreturning default values min: ${defaultMin}, max: ${defaultMax}`,
-        );
+  try {
+    const { min: rawMin, max: rawMax } = await sdk.YearBounds();
 
-        return { min: defaultMin, max: defaultMax };
-      }
-    },
-    undefined,
-    { revalidate: REVALIDATE_TIME },
-  ),
-);
+    const min = rawMin?.startDate?.year ?? defaultMin;
+    const max = rawMax?.startDate?.year ?? defaultMax;
+
+    return { min, max };
+  } catch (error) {
+    console.error(
+      "Error getting min/max year bounds:\n\n",
+      error,
+      `\n\nreturning default values min: ${defaultMin}, max: ${defaultMax}`,
+    );
+
+    return { min: defaultMin, max: defaultMax };
+  }
+};

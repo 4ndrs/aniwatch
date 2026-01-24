@@ -1,3 +1,5 @@
+"use cache";
+
 import Providers from "@/app/ui/providers";
 import Disclaimer from "@/app/ui/disclaimer";
 
@@ -45,23 +47,23 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+const RootLayout = async ({
   children,
 }: Readonly<{
   children: React.ReactNode;
-}>) {
-  return (
-    <html lang="en">
-      <body
-        className={`${roboto.variable} ${overpass.variable} pb-20 antialiased`}
-      >
-        <NuqsAdapter>
-          <Providers>
-            {children}
-            <Disclaimer />
-          </Providers>
-        </NuqsAdapter>
-      </body>
-    </html>
-  );
-}
+}>) => (
+  <html lang="en">
+    <body
+      className={`${roboto.variable} ${overpass.variable} pb-20 antialiased`}
+    >
+      <NuqsAdapter>
+        <Providers>
+          {children}
+          <Disclaimer />
+        </Providers>
+      </NuqsAdapter>
+    </body>
+  </html>
+);
+
+export default RootLayout;

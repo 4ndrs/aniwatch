@@ -7,6 +7,7 @@ const nextConfig: NextConfig = {
     remotePatterns: [new URL("https://s4.anilist.co/**")],
   },
   typedRoutes: true,
+  cacheComponents: true,
 };
 
 export default nextConfig;
