@@ -1,5 +1,3 @@
-"use cache";
-
 import Providers from "@/app/ui/providers";
 import Disclaimer from "@/app/ui/disclaimer";
 
@@ -47,7 +45,7 @@ export const metadata: Metadata = {
   },
 };
 
-const RootLayout = async ({
+const RootLayout = ({
   children,
 }: Readonly<{
   children: React.ReactNode;

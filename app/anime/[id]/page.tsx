@@ -1,5 +1,3 @@
-"use cache";
-
 import { Suspense } from "react";
 import { loadAnime } from "@/app/lib/server-fetchers";
 
@@ -12,7 +10,7 @@ import CharacterCard, { CharacterCardSkeleton } from "@/app/ui/character-card";
 type Props = PageProps<"/anime/[id]">;
 type CommonProps = Pick<Props, "params">;
 
-const Overview = async ({ params }: Props) => (
+const Overview = ({ params }: Props) => (
   <div className="space-y-7.5">
     <Suspense
       fallback={
