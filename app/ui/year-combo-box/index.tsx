@@ -24,12 +24,13 @@ const EMPTY_VALUE = "Any";
 const YearComboBox = ({ promise, ...rest }: Props) => {
   const [isOpen, setIsOpen] = useState(false);
   const [boxWidth, setBoxWidth] = useState(0);
-  const [inputValue, setInputValue] = useState(EMPTY_VALUE);
 
   const [selectedKey, setSelectedKey] = useQueryState("year", {
     shallow: true,
     history: "push",
   });
+
+  const [inputValue, setInputValue] = useState(selectedKey ?? EMPTY_VALUE);
 
   const observeWidth = useCallback((ref: HTMLElement | null) => {
     if (!ref) {
@@ -62,6 +63,7 @@ const YearComboBox = ({ promise, ...rest }: Props) => {
       allowsEmptyCollection
       inputValue={inputValue}
       selectedKey={selectedKey}
+      onOpenChange={(open) => setIsOpen(open)}
       aria-labelledby={rest["aria-labelledby"]}
       onInputChange={(value) => setInputValue(value)}
       onBlur={() => {
@@ -77,7 +79,7 @@ const YearComboBox = ({ promise, ...rest }: Props) => {
         setSelectedKey(key?.toString() || null);
         setInputValue(key?.toString() ?? EMPTY_VALUE);
       }}
-      className="text-text bg-foreground-sp flex items-center gap-3 rounded-md px-4 py-[0.6875rem] font-(family-name:--font-overpass) text-[0.8125rem] leading-[0.934375rem] hover:cursor-text"
+      className="text-text bg-foreground-sp flex items-center gap-3 rounded-md px-4 py-2.75 font-(family-name:--font-overpass) text-[0.8125rem] leading-[0.934375rem] hover:cursor-text"
     >
       <Input
         data-selected={inputValue === selectedKey || undefined}
@@ -112,7 +114,7 @@ const YearComboBox = ({ promise, ...rest }: Props) => {
             "--box-width": boxWidth + "px",
           } as React.CSSProperties
         }
-        className="data-entering:animate-in data-entering:fade-in data-exiting:animate-out data-exiting:fade-out bg-foreground-sp max-h-[31.25rem] w-(--box-width) overflow-auto rounded-md p-2.5"
+        className="data-entering:animate-in data-entering:fade-in data-exiting:animate-out data-exiting:fade-out bg-foreground-sp max-h-125 w-(--box-width) overflow-auto rounded-md p-2.5"
       >
         <ListBox items={years} className="flex w-full flex-col outline-hidden">
           {({ name }) => (
